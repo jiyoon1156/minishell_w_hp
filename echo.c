@@ -9,6 +9,7 @@ int	ft_echo(char **info, char **redir, int r_flag)
 	fd = redirection(redir, r_flag);
 	//i = (new_flag == 0) ? 1 : 0;
 	n_opt = 0;
+	i = 1;
 	if ((info[1] && ft_strcmp(info[1], "-n") == 0))// || new_flag == 1)
 	{
 		n_opt = 1;
