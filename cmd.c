@@ -82,12 +82,12 @@ void	read_cmd(char **info, char **redir, int r_flag, char **envp)
 		ft_putnbr_newline(g_ret);
 	else if (ft_strcmp(info[0], "echo") == 0)
 		g_ret = (ft_strchr(info[1], '$')) ? ft_print_env_1(info) :
-		ft_echo(info, redir, r_flag, 0);
-	else if (ft_strnstr(info[0], "echo", 4))
-	{
-		ft_echo(info, redir, r_flag, newline_valid(info));
-		g_ret = 0;
-	}
+		ft_echo(info, redir, r_flag);
+	// else if (ft_strnstr(info[0], "echo", 4))
+	// {
+	// 	ft_echo(info, redir, r_flag, newline_valid(info));
+	// 	g_ret = 0;
+	// }
 	else if (ft_strcmp(info[0], "cd") == 0)
 		g_ret = ft_cd(info);
 	else if (ft_strcmp(info[0], "pwd") == 0)

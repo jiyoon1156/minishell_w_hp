@@ -12,9 +12,9 @@ int		ft_env_valid(char **info)
 	return (1);
 }
 
-int		ft_print_env(char **envp, char **redir, int r_flag)
+int	ft_print_env(char **envp, char **redir, int r_flag)
 {
-	int	fd;
+	int fd;
 
 	fd = redirection(redir, r_flag);
 	while (*envp)
@@ -28,19 +28,18 @@ int		ft_print_env(char **envp, char **redir, int r_flag)
 	return (0);
 }
 
-void	ft_print_env_1(char **info)
+int	ft_print_env_1(char **info)
 {
-	int		i;
-	char	*ptr;
-	char	*str;
-	char	**tmp;
-	int		len;
+	int	i;
+	char *ptr;
+	char *str;
+	char **tmp;
 
 	i = 0;
 	ptr = ft_strdup(info[1]);
 	str = ft_strtrim(ptr, "$");
 	free(ptr);
-	len = ft_strlen(str);
+	int len = ft_strlen(str);
 	while(g_env[i])
 	{
 		if (!ft_strncmp(g_env[i], str, len) && g_env[i][len] == '=')
@@ -51,14 +50,14 @@ void	ft_print_env_1(char **info)
 	ft_puts(tmp[1]);
 	ft_free(tmp);
 	ft_puts("\n");
+	return (0);
 }
 
-void	ft_env(char **info, char **envp, char **redir, int r_flag)
+int	ft_env(char **info, char **envp, char **redir, int r_flag)
 {
-	char	**env;
-	int		i;
-	int		j;
-
+	char **env;
+	int i;
+	int j;
 	env = malloc(sizeof(char *) * (ft_cnt(envp) + ft_cnt(info) + 1));
 	i = 0;
 	while (envp[i])
@@ -73,11 +72,29 @@ void	ft_env(char **info, char **envp, char **redir, int r_flag)
 		j++;
 	}
 	i = 0;
-	while (env[i])
+	while(env[i])
 		i++;
 	env[i] = 0;
 	ft_print_env(env, redir, r_flag);
-	while (--i > 0)
+	while(--i > 0)
 		free(env[i]);
 	free(env);
+	return (0);
+}
+
+char **ft_cpenv(char **envp)
+{
+	char **env;
+	int i;
+	i = 0;
+	while (envp[i])
+		i++;
+	env = malloc(sizeof(char *) * (i + 1));
+	i = 0;
+	while (envp[i])
+	{
+		env[i] = ft_strdup(envp[i]);
+		i++;
+	}
+	return (env);
 }

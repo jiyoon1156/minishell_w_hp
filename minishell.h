@@ -10,7 +10,7 @@ extern int g_ret;
 extern char **g_env;
 
 int		redirection(char **redir, int r_flag);
-int	ft_echo(char **info, char **redir, int r_flag, int new_flag);
+int	ft_echo(char **info, char **redir, int r_flag);
 int		ft_pwd(char **info, char **redir, int r_flag);
 int		ft_cd(char **info);
 int ft_quote_cnt(char *line, int flag);

@@ -61,6 +61,7 @@ int		execute_cmd(char *line)
 			ft_cmd(&cmd[idx++][j]);
 		}
 	}
+	return (0);
 }
 
 int		main(int ac, char **av, char **envp)
