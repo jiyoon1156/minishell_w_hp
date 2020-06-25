@@ -35,5 +35,6 @@ void child_process(char **info, int *pipefd, char *path_cmd);
 void parent_process(int *pipefd, char **path, char **cmd, int i);
 void ft_pipe(char *cm);
 void		read_env(char **info, char **redir, int r_flag);
+void	fork_process(int *pipefd, char **cmd, char **path, int i);
 
 #endif

@@ -26,12 +26,6 @@ int ft_quote_cnt(char *line, int flag)
 	return (0);
 }
 
-int	ft_ret(char *str, int nb)
-{
-	ft_puts(str);
-	return (nb);
-}
-
 char	*ft_quote(char *line)
 {
 	int		flag;

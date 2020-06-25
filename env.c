@@ -81,20 +81,3 @@ int	ft_env(char **info, char **envp, char **redir, int r_flag)
 	free(env);
 	return (0);
 }
-
-char **ft_cpenv(char **envp)
-{
-	char **env;
-	int i;
-	i = 0;
-	while (envp[i])
-		i++;
-	env = malloc(sizeof(char *) * (i + 1));
-	i = 0;
-	while (envp[i])
-	{
-		env[i] = ft_strdup(envp[i]);
-		i++;
-	}
-	return (env);
-}
