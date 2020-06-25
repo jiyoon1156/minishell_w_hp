@@ -4,7 +4,12 @@
 #include <string.h>
 #include "get_next_line.h"
 #include <signal.h>
+#include <sys/stat.h>
+#include <stdio.h>
 
+
+int		ft_cnt(char **envp);
+void	ft_free(char **info);
 int		ft_strcmp(const char *s1, const char *s2);
 void	ft_putchar(char c);
 void	ft_puts(const char *str);

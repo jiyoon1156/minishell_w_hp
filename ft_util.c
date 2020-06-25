@@ -1,5 +1,18 @@
 #include "ft_util.h"
 
+int		ft_cnt(char **envp)
+{
+	int cnt;
+
+	cnt = 0;
+	while (*envp)
+	{
+		cnt++;
+		envp++;
+	}
+	return (cnt);
+}
+
 int		ft_strcmp(const char *s1, const char *s2)
 {
 	int	i;
@@ -143,33 +156,33 @@ void	ft_putstr_fd(char *s, int fd)
 	write(fd, s, ft_strlen(s));
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
-{
-	size_t	len1;
-	size_t	len2;
-	size_t	i;
-	char	*ptr;
+//char	*ft_strjoin(char const *s1, char const *s2)
+//{
+//	size_t	len1;
+//	size_t	len2;
+//	size_t	i;
+//	char	*ptr;
 
-	if (!s1 || !s2)
-		return (NULL);
-	len1 = ft_strlen(s1);
-	len2 = ft_strlen(s2);
-	if (!(ptr = (char *)malloc(sizeof(char) * (len1 + len2 + 1))))
-		return (NULL);
-	i = 0;
-	while (s1[i])
-	{
-		ptr[i] = s1[i];
-		i++;
-	}
-	i = 0;
-	while (s2[i])
-	{
-		ptr[len1++] = s2[i++];
-	}
-	ptr[len1] = '\0';
-	return (ptr);
-}
+//	if (!s1 || !s2)
+//		return (NULL);
+//	len1 = ft_strlen(s1);
+//	len2 = ft_strlen(s2);
+//	if (!(ptr = (char *)malloc(sizeof(char) * (len1 + len2 + 1))))
+//		return (NULL);
+//	i = 0;
+//	while (s1[i])
+//	{
+//		ptr[i] = s1[i];
+//		i++;
+//	}
+//	i = 0;
+//	while (s2[i])
+//	{
+//		ptr[len1++] = s2[i++];
+//	}
+//	ptr[len1] = '\0';
+//	return (ptr);
+//}
 
 void	ft_putnbr(int n)
 {
