@@ -1,18 +1,18 @@
 #include "minishell.h"
 
-char	**ft_find_path()
+char	**ft_find_path(void)
 {
 	int		i;
 	char	**path;
 
 	i = 0;
-	while(g_env[i])
+	while (g_env[i])
 	{
-		if((ft_strncmp(g_env[i], "PATH=", 5) == 0))
+		if ((ft_strncmp(g_env[i], "PATH=", 5) == 0))
 			path = ft_split(&g_env[i][5], ':');
 		i++;
 	}
-	return(path);
+	return (path);
 }
 
 void	ft_pipe(char *cm)

@@ -1,10 +1,10 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-#include "ft_util.h"
-#include "get_next_line.h"
-#include <sys/wait.h>
-#include <dirent.h>
+# include "ft_util.h"
+# include "get_next_line.h"
+# include <sys/wait.h>
+# include <dirent.h>
 
 extern int g_ret;
 extern char **g_env;

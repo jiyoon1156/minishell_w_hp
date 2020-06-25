@@ -1,8 +1,8 @@
 #include "minishell.h"
 
-int	end_of_quote(char *tmp)
+int		end_of_quote(char *tmp)
 {
-	int	cnt;
+	int		cnt;
 
 	cnt = 0;
 	if (*(tmp - 1) == '"')
@@ -18,7 +18,7 @@ int	end_of_quote(char *tmp)
 	return (cnt);
 }
 
-int	cnt_info(char *line)
+int		cnt_info(char *line)
 {
 	char	*tmp;
 	int		cnt;
@@ -43,12 +43,12 @@ int		until_quote(char *tmp)
 		if (*(tmp + cnt) != '"' && *(tmp + cnt) != '\'' && *(tmp + cnt) != ' ')
 			cnt++;
 		else
-			break;
+			break ;
 	}
 	return (cnt);
 }
 
-char	**get_info(char *tmp, char	**info)
+char	**get_info(char *tmp, char **info)
 {
 	int		cnt;
 	int		i;
@@ -76,7 +76,7 @@ char	**get_info(char *tmp, char	**info)
 	return (info);
 }
 
-int	ft_quote_cmd(char *line)
+int		ft_quote_cmd(char *line)
 {
 	char	**info;
 

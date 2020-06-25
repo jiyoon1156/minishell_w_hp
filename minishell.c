@@ -3,7 +3,7 @@
 int	g_ret = 0;
 char **g_env = 0;
 
-void	print_prompt()
+void	print_prompt(void)
 {
 	ft_puts("minish% ");
 }
@@ -71,8 +71,8 @@ int		main(int ac, char **av, char **envp)
 	(void)ac;
 	(void)av;
 	g_env = ft_cpenv(envp);
-	signal(SIGINT, signal_handler); //ctrl+c
-	signal(SIGQUIT, signal_handler);//ctrl+backslash
+	signal(SIGINT, signal_handler);
+	signal(SIGQUIT, signal_handler);
 	print_prompt();
 	while (get_next_line(1, &line) > 0)
 	{

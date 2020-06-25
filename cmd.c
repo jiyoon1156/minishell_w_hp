@@ -52,19 +52,6 @@ int		ft_cmd(char *cmd)
 	return (0);
 }
 
-int		newline_valid(char **info)
-{
-	int		echo_newline_flag;
-	char	**cmd;
-
-	echo_newline_flag = 0;
-	cmd = ft_split(info[0], ' ');
-	if ((ft_strcmp(cmd[1], "-n")) == 0)
-		echo_newline_flag = 1;
-	ft_free(cmd);
-	return (echo_newline_flag);
-}
-
 void	read_env(char **info, char **redir, int r_flag)
 {
 	if (!info[1])
@@ -83,11 +70,6 @@ void	read_cmd(char **info, char **redir, int r_flag, char **envp)
 	else if (ft_strcmp(info[0], "echo") == 0)
 		g_ret = (ft_strchr(info[1], '$')) ? ft_print_env_1(info) :
 		ft_echo(info, redir, r_flag);
-	// else if (ft_strnstr(info[0], "echo", 4))
-	// {
-	// 	ft_echo(info, redir, r_flag, newline_valid(info));
-	// 	g_ret = 0;
-	// }
 	else if (ft_strcmp(info[0], "cd") == 0)
 		g_ret = ft_cd(info);
 	else if (ft_strcmp(info[0], "pwd") == 0)

@@ -18,7 +18,7 @@ void	ft_free(char **info)
 	int i;
 
 	i = 0;
-	while(info[i])
+	while (info[i])
 		free(info[i++]);
 	free(info);
 	info = 0;
@@ -121,6 +121,7 @@ char			**ft_split(char *s, char c)
 	result[i] = NULL;
 	return (result);
 }
+
 char	*ft_strjoin_sh(char const *s1, char const *s2)
 {
 	size_t	len;
@@ -140,6 +141,7 @@ char	*ft_strjoin_sh(char const *s1, char const *s2)
 	result[i] = '\0';
 	return (result);
 }
+
 char	*ft_strjoin_newline(char const *s1, char const *s2)
 {
 	size_t	len;
@@ -261,6 +263,7 @@ static char	*ft_strncpy(char *dest, const char *src, size_t n)
 	}
 	return (dest);
 }
+
 char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
 	size_t i;
@@ -282,6 +285,7 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	}
 	return (0);
 }
+
 char		*ft_strtrim(char const *s1, char const *set)
 {
 	size_t	start;

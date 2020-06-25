@@ -1,12 +1,12 @@
 #include "minishell.h"
 
-int ft_quote_cnt(char *line, int flag)
+int		ft_quote_cnt(char *line, int flag)
 {
 	int cnt_dq;
 	int cnt_q;
+
 	cnt_dq = 0;
 	cnt_q = 0;
-
 	if (flag == 1)
 		cnt_dq = 1;
 	if (flag == 0)

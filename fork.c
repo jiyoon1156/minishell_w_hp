@@ -2,12 +2,14 @@
 
 char	*ft_pathjoin(char **path, char **cmd)
 {
-	DIR				*dp = NULL;
-	struct dirent	*entry = NULL;
+	DIR				*dp;
+	struct dirent	*entry;
 	struct stat		buf;
 	char			*res;
 	int				i;
 
+	dp = NULL;
+	entry = NULL;
 	i = 0;
 	while (path[i])
 	{
@@ -19,10 +21,10 @@ char	*ft_pathjoin(char **path, char **cmd)
 				if (S_ISDIR(buf.st_mode) && (ft_strcmp(entry->d_name, cmd[0]) == 0))
 				{
 					res = ft_strjoin_sh(path[i], cmd[0]);
-					break;
+					break ;
 				}
 			}
-		closedir(dp);
+			closedir(dp);
 		}
 		i++;
 	}
@@ -33,7 +35,7 @@ void	child_process(char **info, int *pipefd, char *path_cmd)
 {
 	if (pipefd[0] != 0)
 		close(pipefd[0]);
-	dup2(pipefd[1],1);
+	dup2(pipefd[1], 1);
 	if (pipefd[1] != 1)
 		close(pipefd[1]);
 	execve(path_cmd, info, g_env);
@@ -44,7 +46,7 @@ void	parent_process(int *pipefd, char **path, char **cmd, int i)
 {
 	int		pipefd2[2];
 
-	close(pipefd[1]); //EOF
+	close(pipefd[1]);
 	dup2(pipefd[0], 0);
 	close(pipefd[0]);
 	pipefd2[0] = 0;
