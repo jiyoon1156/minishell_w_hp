@@ -55,26 +55,33 @@ char	**get_info(char *line)
 
 }
 
-char	**get_cmds(char *line)
+int		count_char(char *line, int c)
 {
-	/* ;를 기준으로 commands 끊기
-		따옴표 고려해서 */
-	char	**cmds;
-	char	*tmp;
-	int		quote;
 	int		i;
 	int		cnt;
 
-	/* 따옴표 개수 세기 (malloc에 필요) */
 	i = 0;
 	cnt = 0;
 	while (line[i])
 	{
-		if (line[i] == ';')
+		if (line[i] == c)
 			cnt++;
 		i++;
 	}
-	cmds = malloc(sizeof(char *) * cnt + 2);
+	return (cnt);
+}
+
+/* ;를 기준으로 commands 끊기
+		따옴표 고려해서 */
+
+char	**get_cmds(char *line)
+{
+	char	**cmds;
+	char	*tmp;
+	int		quote;
+	int		i;
+
+	cmds = malloc(sizeof(char *) * count_char(line, ';') + 2);
 	i = 0;
 	quote = 0;
 	tmp = line;
