@@ -95,15 +95,6 @@ char	**get_info(char *line)
 	}
 	info[i] = ft_substr(tmp, 0, (line - tmp));
 	info[i + 1] = 0;
-	
-	i = 0;
-	while (info[i])
-	{
-		ft_puts(info[i++]);
-		ft_puts("!\n");
-	}
-
-	return (info);
 }
 
 /* ;를 기준으로 commands 끊기
@@ -116,7 +107,7 @@ char	**get_cmds(char *line)
 	int		quote;
 	int		i;
 
-	cmds = malloc(sizeof(char *) * count_char(line, ';') + 2);
+	cmds = malloc(sizeof(char *) * (count_char(line, ';') + 2));
 	i = 0;
 	quote = 0;
 	tmp = line;
@@ -146,12 +137,10 @@ int		execute_cmds(char *line)
 	idx = 0;
 	while (cmds[idx])
 	{
-		//ft_puts(cmds[idx]);
-		//ft_puts("\n");
+		// ft_puts(cmds[idx]);
+		// ft_puts("\n");
 		//idx++;
-		//j = 0;
-		//while (cmds[idx][j] == ' ')
-		//	j++;
+
 		info = get_info(cmds[idx++]);
 		//read_cmd(info);	/* redirection, pipe 처리도 같이 */
 		//ft_cmd(&cmds[idx++][j]);
