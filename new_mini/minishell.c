@@ -45,10 +45,11 @@ void	quote_check(int *quote, char c)
 		*quote = 0;
 }
 
+/* cmd 에서 info 가져오기
+		따옴표 고려해서 */
+
 char	**get_info(char *line)
 {
-	/* cmd 에서 info 가져오기
-		따옴표 고려해서 */
 	char	**info;
 
 
@@ -111,13 +112,13 @@ int		execute_cmds(char *line)
 	idx = 0;
 	while (cmds[idx])
 	{
-		ft_puts(cmds[idx]);
-		ft_puts("\n");
-		idx++;
+		// ft_puts(cmds[idx]);
+		// ft_puts("\n");
+		// idx++;
 		//j = 0;
 		//while (cmds[idx][j] == ' ')
 		//	j++;
-		//info = get_info(line);
+		info = get_info(cmds[idx++]);
 		//read_cmd(info);	/* redirection, pipe 처리도 같이 */
 		//ft_cmd(&cmds[idx++][j]);
 	}
