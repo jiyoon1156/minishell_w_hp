@@ -39,7 +39,7 @@ char	**ft_cpenv(char **envp)
 
 void	quote_check(int *quote, char c)
 {
-	if (*quote = 0 && (c == '\'' || c == '"'))
+	if (*quote == 0 && (c == '\'' || c == '"'))
 		*quote = c;
 	else if (*quote != 0 && *quote == c)
 		*quote = 0;
@@ -51,8 +51,8 @@ char	**get_info(char *line)
 		따옴표 고려해서 */
 	char	**info;
 
-	
-	
+
+
 }
 
 char	**get_cmds(char *line)
@@ -88,8 +88,8 @@ char	**get_cmds(char *line)
 		}
 		line++;
 	}
-	cmds[i++] = ft_substr(tmp, 0, (line - tmp));
-	cmds[i] = 0;
+	cmds[i] = ft_substr(tmp, 0, (line - tmp));
+	cmds[i + 1] = 0;
 	return (cmds);
 }
 
