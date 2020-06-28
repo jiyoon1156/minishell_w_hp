@@ -9,6 +9,10 @@
 extern int g_ret;
 extern char **g_env;
 
+char	**get_info(char *line);
+int		count_char(char *line, int c);
+int		quote_check(int *quote, char c);
+
 int		redirection(char **redir, int r_flag);
 int		ft_echo(char **info, char **redir, int r_flag);
 int		ft_pwd(char **info, char **redir, int r_flag);
@@ -24,7 +28,7 @@ void	read_cmd(char **info, char **redir, int r_flag, char **envp);
 int		ft_quote_cnt(char *line, int flag);
 char	*ft_quote(char *line);
 int		ft_quote_cmd(char *line);
-int		ft_cmd(char *cmd);
+//int		ft_cmd(char *cmd);
 void	fork_process(int *pipefd, char **cmd, char **path, int i);
 void	ft_pipe(char *cm);
 void	read_env(char **info, char **redir, int r_flag);
