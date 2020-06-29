@@ -26,17 +26,17 @@ void	read_cmd(char **info, int fd)
 		ft_putnbr_newline(g_ret);
 	else if (ft_strcmp(info[0], "echo") == 0)
 		g_ret = (ft_strchr(info[1], '$')) ? ft_print_env_1(info) :
-		ft_echo(info, redir, r_flag);
+		ft_echo(info, fd);
 	else if (ft_strcmp(info[0], "cd") == 0)
 		g_ret = ft_cd(info);
 	else if (ft_strcmp(info[0], "pwd") == 0)
-		g_ret = ft_pwd(info, redir, r_flag);
+		g_ret = ft_pwd(info, fd);
 	else if (ft_strcmp(info[0], "unset") == 0)
-		g_ret = (info[1]) ? ft_unset(info, envp)
+		g_ret = (info[1]) ? ft_unset(info, g_env)
 		: ft_ret("unset: not enough arguments\n", 1);
 	else if (ft_strcmp(info[0], "export") == 0)
-		g_ret = (!info[1]) ? ft_print_env(envp, redir, r_flag)
-		: ft_export(info, envp, redir, r_flag);
+		g_ret = (!info[1]) ? ft_print_env(g_env, fd)
+		: ft_export(info, g_env, fd);
 	else if (ft_strcmp(info[0], "env") == 0)
 		read_env(info, fd);
 	else if (ft_strcmp(info[0], "exit") == 0)
