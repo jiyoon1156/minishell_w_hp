@@ -22,6 +22,8 @@ void	read_env(char **info, int fd)
 }
 void	read_cmd(char **info, int fd)
 {
+	char *path_cmd;
+
 	if (ft_strcmp(info[0], "$?") == 0)
 		ft_putnbr_newline(g_ret);
 	else if (ft_strcmp(info[0], "echo") == 0)
@@ -41,6 +43,8 @@ void	read_cmd(char **info, int fd)
 		read_env(info, fd);
 	else if (ft_strcmp(info[0], "exit") == 0)
 		exit(0);
+	else if((path_cmd = ft_pathjoin(ft_find_path(), info)))
+		execve(path_cmd, info, g_env);
 	else
 		g_ret = ft_ret("command not found\n", 127);
 }

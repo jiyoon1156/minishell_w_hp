@@ -31,5 +31,7 @@ int		ft_cmd(char **infos);
 void	fork_process(int *pipefd, char **cmd, char **path, int i);
 void	ft_pipe(char *cm);
 void	read_env(char **info, int fd);
+char	**ft_find_path(void);
+char	*ft_pathjoin(char **path, char **cmd);
 
 #endif
