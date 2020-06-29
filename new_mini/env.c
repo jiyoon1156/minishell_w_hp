@@ -12,11 +12,8 @@ int	ft_env_valid(char **info)
 	return (1);
 }
 
-int	ft_print_env(char **envp, char **redir, int r_flag)
+int	ft_print_env(char **envp, int fd)
 {
-	int		fd;
-
-	fd = redirection(redir, r_flag);
 	while (*envp)
 	{
 		ft_putstr_fd(*envp, fd);
@@ -54,7 +51,7 @@ int	ft_print_env_1(char **info)
 	return (0);
 }
 
-int	ft_env(char **info, char **envp, char **redir, int r_flag)
+int	ft_env(char **info, char **envp, int fd)
 {
 	char	**env;
 	int		i;
@@ -74,7 +71,7 @@ int	ft_env(char **info, char **envp, char **redir, int r_flag)
 	while (env[i])
 		i++;
 	env[i] = 0;
-	ft_print_env(env, redir, r_flag);
+	ft_print_env(env, fd);
 	while (--i > 0)
 		free(env[i]);
 	free(env);

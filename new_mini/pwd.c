@@ -1,9 +1,8 @@
 #include "minishell.h"
 
-int	ft_pwd(char **info, char **redir, int r_flag)
+int	ft_pwd(char **info, int fd)
 {
 	char	path[1024];
-	int		fd;
 
 	if (info[1] != NULL)
 	{

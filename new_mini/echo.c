@@ -1,12 +1,10 @@
 #include "minishell.h"
 
-int	ft_echo(char **info, char **redir, int r_flag)
+int	ft_echo(char **info, int fd)
 {
 	int	i;
 	int	n_opt;
-	int	fd;
 
-	fd = redirection(redir, r_flag);
 	n_opt = 0;
 	i = 1;
 	if ((info[1] && ft_strcmp(info[1], "-n") == 0))

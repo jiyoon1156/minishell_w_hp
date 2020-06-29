@@ -10,7 +10,16 @@ int		parse_err(char *ptr, int c)
 	}
 	return (0);
 }
-
+void	read_env(char **info, int fd)
+{
+	if (!info[1])
+		g_ret = ft_print_env(g_env, fd);
+	if (info[1])
+	{
+		if ((g_ret = ft_env_valid(info)))
+			ft_env(info, g_env, fd);
+	}
+}
 void	read_cmd(char **info, int fd)
 {
 	if (ft_strcmp(info[0], "$?") == 0)
@@ -29,7 +38,7 @@ void	read_cmd(char **info, int fd)
 		g_ret = (!info[1]) ? ft_print_env(envp, redir, r_flag)
 		: ft_export(info, envp, redir, r_flag);
 	else if (ft_strcmp(info[0], "env") == 0)
-		read_env(info, redir, r_flag);
+		read_env(info, fd);
 	else if (ft_strcmp(info[0], "exit") == 0)
 		exit(0);
 	else

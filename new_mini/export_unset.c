@@ -47,7 +47,7 @@ void	env_add(char *info, char **env)
 	env[i] = ft_strdup(info);
 }
 
-int		ft_export(char **info, char **envp, char **redir, int r_flag)
+int		ft_export(char **info, char **envp, int fd)
 {
 	char	**env;
 	int		i;
@@ -67,7 +67,7 @@ int		ft_export(char **info, char **envp, char **redir, int r_flag)
 	while (env[i])
 		i++;
 	env[i] = 0;
-	ft_print_env(env, redir, r_flag);
+	ft_print_env(env, fd);
 	free(g_env);
 	g_env = env;
 	return (0);
