@@ -86,7 +86,7 @@ char	**get_cmds(char *line, char sep)
 			cmds[i++] = ft_substr(tmp, 0, (line++ - tmp));
 			while (*line && *line == ' ')
 				line++;
-			if (*(tmp = line) == sep)
+			if (*(tmp = line) == sep)//; 가 두개일때 파스에러
 			{
 				//에러 처리하기 - free하고
 				ft_puts("parse error\n");
@@ -117,6 +117,7 @@ int		execute_cmds(char *cmds)
 		//read_cmd(info);	/* redirection, pipe 처리도 같이 */
 		//ft_cmd(&cmds[idx++][j]);
 	}
+	ft_cmd(info);
 	return (0);
 }
 
@@ -137,7 +138,7 @@ int		main(int ac, char **av, char **envp)
 		{
 			if ((ft_quote_cnt(line, -1)) != 0)
 				line = ft_quote(line);
-			if (cmds = get_cmds(line, ';'))
+			if ((cmds = get_cmds(line, ';')))
 			{
 				while (*cmds)
 					execute_cmds(*cmds++);

@@ -1,17 +1,42 @@
 #include "minishell.h"
 
+int		parse_err(char *ptr, int c)
+{
+	int		i;
+
+	i = (c == '>') ? 2 : 1;
+	if (*(ptr + i) == c)
+	{
+		(c == '>') ? ft_puts("parse error near `>'\n") :
+		ft_puts("parse error near `|'\n");
+		g_ret = 127;
+		return (0);
+	}
+	return (0);
+}
+
 int		ft_cmd(char **info)
 {
 	int	i;
+	int r_flag;
 
 	i = 0;
+	r_flag = 0;
 	while (info[i])
 	{
-		if (ft_strncmp(info[i], ">", ft_strlen(info[i])))
+		if (ft_strcmp(info[i], ">") == 0)
 		{
-
+			if (ft_strcmp(info[++i], ">") == 0)
+			{
+				r_flag = 1;
+				if (ft_strcmp(info[i + 1], ">") == 0 && !(parse_err(info[i + 1], '>')))
+					return (0);
+			}
+			redirection(info[++i], r_flag);
 		}
+		i++;
 	}
+	///////////////////////////////////////////////////
 	// if ((ptr = ft_strchr(cmd, '>')))
 	// {
 	// 	if (*(ptr + 1) == '>')
@@ -29,7 +54,7 @@ int		ft_cmd(char **info)
 	// }
 	// else
 	// 	normal_cmd(cmd, redir, r_flag);
-	// return (0);
+	return (0);
 }
 /*
 void	read_cmd(char **info, char **redir, int r_flag, char **envp)
