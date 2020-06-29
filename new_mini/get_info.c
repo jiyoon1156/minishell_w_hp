@@ -34,7 +34,7 @@ char	*info_redirection(char *line)
 	if (!(info = malloc(sizeof(char) * 2)))
 		return (0);
 	//QUOTE 밖에 있는 redirection 은 작동해야하기에 판별하는걸 -1 곱해주는것으로 한다.
-	info[i] = *(line++); //* (-1);
+	info[i] = *(line++) * (-1);
 	info[i + 1] = '\0';
 	return (info);
 }
@@ -51,7 +51,7 @@ void	**get_info2(char *line, char **info, char *tmp, int quote)
 			while (*line && *line == ' ')
 				line++;
 			//>> 일때랑 여러개일 때 파스에러처리
-			if ((*line == '>' || *line == '<') && quote == 0)
+			if (*line == '>' || *line == '<') //quote 0 조건이 필요한가??
 				*info++ = info_redirection(line++);
 			// else if (*line == '|' && quote == 0)
 			// 	*info++ = info_pipe_or_redirection(line++);

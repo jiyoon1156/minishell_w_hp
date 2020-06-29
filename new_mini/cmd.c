@@ -2,62 +2,16 @@
 
 int		parse_err(char *ptr, int c)
 {
-	int		i;
-
-	i = (c == '>') ? 2 : 1;
-	if (*(ptr + i) == c)
+	if (*ptr == (c * (-1)))
 	{
-		(c == '>') ? ft_puts("parse error near `>'\n") :
-		ft_puts("parse error near `|'\n");
+		(c == '>') ? ft_puts("parse error near `>'\n") : "";
 		g_ret = 127;
 		return (0);
 	}
 	return (0);
 }
 
-int		ft_cmd(char **info)
-{
-	int	i;
-	int r_flag;
-
-	i = 0;
-	r_flag = 0;
-	while (info[i])
-	{
-		if (ft_strcmp(info[i], ">") == 0)
-		{
-			if (ft_strcmp(info[++i], ">") == 0)
-			{
-				r_flag = 1;
-				if (ft_strcmp(info[i + 1], ">") == 0 && !(parse_err(info[i + 1], '>')))
-					return (0);
-			}
-			redirection(info[++i], r_flag);
-		}
-		i++;
-	}
-	///////////////////////////////////////////////////
-	// if ((ptr = ft_strchr(cmd, '>')))
-	// {
-	// 	if (*(ptr + 1) == '>')
-	// 		r_flag = 1;
-	// 	if ((*(ptr + 2) == '>') && !(parse_err(ptr, '>')))
-	// 		return (0);
-	// 	redir = ft_split(cmd, '>');
-	// 	cmd = redir[0];
-	// }
-	// if ((ptr = ft_strchr(cmd, '|')))
-	// {
-	// 	if ((*(ptr + 1) == '|') && !parse_err(ptr, '|'))
-	// 		return (0);
-	// 	ft_pipe(cmd);
-	// }
-	// else
-	// 	normal_cmd(cmd, redir, r_flag);
-	return (0);
-}
-/*
-void	read_cmd(char **info, char **redir, int r_flag, char **envp)
+void	read_cmd(char **info, int fd)
 {
 	if (ft_strcmp(info[0], "$?") == 0)
 		ft_putnbr_newline(g_ret);
@@ -80,4 +34,49 @@ void	read_cmd(char **info, char **redir, int r_flag, char **envp)
 		exit(0);
 	else
 		g_ret = ft_ret("command not found\n", 127);
-}*/
+}
+
+int		ft_cmd(char **info)
+{
+	int	i;
+	int r_flag;
+	int fd;
+
+	i = 0;
+	r_flag = 0;
+	fd = 1;
+	while (info[i])
+	{
+		if (*info[i] == ('>' * (-1)))
+		{
+			if (*info[++i] == ('>' * (-1)))
+			{
+				r_flag = 1;
+				if (*info[++i] == ('>' * (-1)) && !(parse_err(info[i], '>')))
+					return (0);
+			}
+			fd = redirection(info[i], r_flag);
+		}
+		i++;
+	}
+	read_cmd(info, fd);
+	///////////////////////////////////////////////////
+	// if ((ptr = ft_strchr(cmd, '>')))
+	// {
+	// 	if (*(ptr + 1) == '>')
+	// 		r_flag = 1;
+	// 	if ((*(ptr + 2) == '>') && !(parse_err(ptr, '>')))
+	// 		return (0);
+	// 	redir = ft_split(cmd, '>');
+	// 	cmd = redir[0];
+	// }
+	// if ((ptr = ft_strchr(cmd, '|')))
+	// {
+	// 	if ((*(ptr + 1) == '|') && !parse_err(ptr, '|'))
+	// 		return (0);
+	// 	ft_pipe(cmd);
+	// }
+	// else
+	// 	normal_cmd(cmd, redir, r_flag);
+	return (0);
+}
