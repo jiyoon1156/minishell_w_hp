@@ -3,7 +3,7 @@
 int	ft_env_valid(char **info)
 {
 	info++;
-	while (*info)
+	while (*info && (*info[0] != R_REDIR) && (*info[0] != L_REDIR))
 	{
 		if (!ft_strchr(*info, '='))
 			return (0);
@@ -70,15 +70,19 @@ int	ft_env(char **info, char **envp, int fd)
 		i++;
 	}
 	j = 0;
-	while (info[++j])
+	while (info[++j] && info[j][0] != R_REDIR && info[j][0] != L_REDIR)
 		env_add(info[j], env);
 	i = 0;
 	while (env[i])
 		i++;
 	env[i] = 0;
 	ft_print_env(env, fd);
-	while (--i > 0)
+	while (i < 0 && env[i])
+	{
+		i--;
 		free(env[i]);
+		env[i] = 0;
+	}
 	free(env);
 	return (0);
 }

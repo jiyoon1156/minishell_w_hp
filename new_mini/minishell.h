@@ -1,5 +1,7 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
+# define R_REDIR '>' * (-1) //-62
+# define L_REDIR '<' * (-1) //-60
 
 # include "ft_util.h"
 # include "get_next_line.h"
@@ -33,5 +35,6 @@ void	ft_pipe(char *cm);
 void	read_env(char **info, int fd);
 char	**ft_find_path(void);
 char	*ft_pathjoin(char **path, char **cmd);
+
 
 #endif

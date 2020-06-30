@@ -22,5 +22,6 @@ void	ft_free(char **info);
 int		ft_cnt(char **envp);
 void	ft_putnbr_newline(int n);
 int		ft_ret(char *str, int nb);
+char	*ft_strncpy(char *dest, const char *src, size_t n);
 
 #endif
