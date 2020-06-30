@@ -12,9 +12,9 @@ int	redirection(char *redir, int r_flag)
 		else if (r_flag == 0)
 			fd = open(redir, O_TRUNC | O_CREAT | O_WRONLY, S_IRWXU);
 		else
-			fd = open(redir, O_TRUNC | O_CREAT | O_RDONLY, S_IRWXU);
+			fd = open(redir, O_TRUNC | O_RDONLY, S_IRWXU);
 	}
 	if (fd == -1)
-		ft_puts("FD ERROR");
+		ft_puts("no such file or directory");
 	return (fd);
 }
