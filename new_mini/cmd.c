@@ -20,6 +20,29 @@ void	read_env(char **info, int fd)
 			ft_env(info, g_env, fd);
 	// }
 }
+
+void	ft_cmd_fork(char *path_cmd, char **info)
+{
+	int pid;
+	int status;
+
+	pid = fork();
+	if (pid < 0)
+	{
+		ft_puts("fork failed");
+		exit(1);
+	}
+	else if (pid == 0)
+	{
+		execve(path_cmd, info, g_env);
+	}
+	else
+	{
+		waitpid(pid, &status, 0);
+	}
+	
+}
+
 void	read_cmd(char **info, int fd)
 {
 	char *path_cmd;
@@ -44,7 +67,7 @@ void	read_cmd(char **info, int fd)
 	else if (ft_strcmp(info[0], "exit") == 0)
 		exit(0);
 	else if((path_cmd = ft_pathjoin(ft_find_path(), info)))
-		execve(path_cmd, info, g_env);
+		ft_cmd_fork(path_cmd, info);
 	else
 		g_ret = ft_ret("command not found\n", 127);
 }
@@ -66,6 +89,12 @@ int		ft_cmd(char **info)
 			{
 				r_flag = 1;
 				if (*info[++i] == ('>' * (-1)) && !(parse_err(info[i], '>')))
+					return (0);
+			}
+			if (*info[--i] == ('<' * (-1)))
+			{
+				r_flag = 2;
+				if (*info[++i] == ('<' * (-1)) && !(parse_err(info[i], '<')))
 					return (0);
 			}
 			fd = redirection(info[i], r_flag);

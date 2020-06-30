@@ -11,6 +11,7 @@ char	*ft_pathjoin(char **path, char **cmd)
 	dp = NULL;
 	entry = NULL;
 	i = 0;
+	res = 0;
 	while (path[i])
 	{
 		if ((dp = opendir(path[i])) != NULL)
@@ -70,7 +71,7 @@ void	fork_process(int *pipefd, char **cmd, char **path, int i)
 	}
 	else if (pid == 0)
 	{
-		info = ft_split(cmd[i], ' ');
+		info = get_info(cmd[i]);
 		child_process(info, pipefd, ft_pathjoin(path, info));
 	}
 	else

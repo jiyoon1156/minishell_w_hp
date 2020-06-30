@@ -22,7 +22,7 @@ void	ft_pipe(char *cm)
 	char	**path;
 
 	path = ft_find_path();
-	cmd = ft_split(cm, '|');
+	cmd = get_cmds(cm, '|');
 	pipe(pipefd);
 	fork_process(pipefd, cmd, path, 0);
 }

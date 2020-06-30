@@ -16,6 +16,8 @@ char	*ft_substr_without_quote(char *str, unsigned int start, int len)
 	quote = 0;
 	while (start < len)
 	{
+		if (str[start] == '\\' && quote != '\'')
+			start++;
 		changed = quote_check(&quote, str[start]);
 		if (changed == 0)
 			ptr[i++] = str[start];
@@ -84,12 +86,12 @@ char	**get_info(char *line)
 	get_info2(line, info, tmp, quote);
 
 ///////info 확인코드///////
-	// int i = 0;
-	// while (info[i])
-	// {
-	// 	ft_puts(info[i++]);
-	// 	ft_puts("!\n");
-	// }
+	int i = 0;
+	while (info[i])
+	{
+		ft_puts(info[i++]);
+		ft_puts("!\n");
+	}
 //////////////////////////
 	
 	return (info);
