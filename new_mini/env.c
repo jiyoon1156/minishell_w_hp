@@ -77,8 +77,13 @@ int	ft_env(char **info, char **envp, int fd)
 		i++;
 	env[i] = 0;
 	ft_print_env(env, fd);
-	while (--i > 0)
-		free(env[i]);
+	while (i < 0 && env[i])
+	{
+		i--;
+	 	free(env[i]);
+	 	env[i] = 0;
+	}
 	free(env);
+	env = 0;
 	return (0);
 }

@@ -12,13 +12,13 @@ int		parse_err(char *ptr, int c)
 }
 void	read_env(char **info, int fd)
 {
-	if (!info[1] || *info[1] == ('>' * (-1)))
-		g_ret = ft_print_env(g_env, fd);
-	if (info[1])
-	{
+	// if (!info[1] || *info[1] == ('>' * (-1)))
+	// 	g_ret = ft_print_env(g_env, fd);
+	// if (info[1])
+	// {
 		if ((g_ret = ft_env_valid(info)))
 			ft_env(info, g_env, fd);
-	}
+	// }
 }
 void	read_cmd(char **info, int fd)
 {

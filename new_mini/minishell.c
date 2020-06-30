@@ -102,22 +102,24 @@ char	**get_cmds(char *line, char sep)
 
 int		execute_cmds(char *cmds)
 {
-	char	**cmd;
+	//char	**cmd;
 	char	**info;
 	int		i;
 	int		j;
 
-	if (!(cmd = get_cmds(cmds, '|')))
-		return (0);
 	i = 0;
-	while (cmd[i])
-	{
-
-		info = get_info(cmd[i++]);
+	info = get_info(cmds);
 		//read_cmd(info);	/* redirection, pipe 처리도 같이 */
 		//ft_cmd(&cmds[idx++][j]);
-	}
 	ft_cmd(info);
+	// while (*info)
+	// {
+	// 	free(*info);
+	// 	*info = 0;
+	// 	info++;
+	// }
+	// free(info);
+	// info = 0;
 	return (0);
 }
 
@@ -141,7 +143,12 @@ int		main(int ac, char **av, char **envp)
 			if ((cmds = get_cmds(line, ';')))
 			{
 				while (*cmds)
-					execute_cmds(*cmds++);
+				{
+					execute_cmds(*cmds);
+					free(*cmds);
+					*cmds = 0;
+					cmds++;
+				}
 			}
 			free(line);
 			line = 0;
