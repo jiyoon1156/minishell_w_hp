@@ -39,7 +39,7 @@ char	*info_redirection(char *line)
 	return (info);
 }
 
-void	**get_info2(char *line, char **info, char *tmp, int quote)
+void	get_info2(char *line, char **info, char *tmp, int quote)
 {
 	while (*line)
 	{
