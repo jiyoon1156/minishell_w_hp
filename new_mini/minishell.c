@@ -86,7 +86,7 @@ char	**get_cmds(char *line, char sep)
 			cmds[i++] = ft_substr(tmp, 0, (line++ - tmp));
 			while (*line && *line == ' ')
 				line++;
-			if (*(tmp = line) == sep)//; 가 두개일때 파스에러
+			if (*(tmp = line) && *tmp == sep)//; 가 두개일때 파스에러
 			{
 				//에러 처리하기 - free하고
 				ft_puts("parse error\n");
