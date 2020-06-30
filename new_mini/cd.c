@@ -4,7 +4,6 @@ static char	**ft_find_home(void)
 {
 	int		i;
 	char	**path;
-	char	**home;
 
 	i = 0;
 	while (g_env[i])
@@ -15,9 +14,7 @@ static char	**ft_find_home(void)
 		}
 		i++;
 	}
-	home = path;
-	ft_free(path);
-	return (home);
+	return (path);
 }
 
 int			ft_cd(char **info)
@@ -35,5 +32,6 @@ int			ft_cd(char **info)
 		res = 1;
 		ft_puts("cd: no such file or directory\n");
 	}
+	ft_free(home);
 	return (res);
 }

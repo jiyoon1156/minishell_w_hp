@@ -35,6 +35,7 @@ void	ft_pipe(char *cm);
 void	read_env(char **info, int fd);
 char	**ft_find_path(void);
 char	*ft_pathjoin(char **path, char **cmd);
+char	**get_cmds(char *line, char sep);
 
 
 #endif

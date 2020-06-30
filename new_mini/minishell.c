@@ -108,10 +108,16 @@ int		execute_cmds(char *cmds)
 	int		j;
 
 	i = 0;
-	info = get_info(cmds);
+
+	if (ft_strchr(cmds, '|'))
+		ft_pipe(cmds);
+	else
+	{
+		info = get_info(cmds);
 		//read_cmd(info);	/* redirection, pipe 처리도 같이 */
 		//ft_cmd(&cmds[idx++][j]);
-	ft_cmd(info);
+		ft_cmd(info);
+	}
 	// while (*info)
 	// {
 	// 	free(*info);
