@@ -14,6 +14,8 @@ int	ft_echo(char **info, int fd)
 	}
 	while (info[i])
 	{
+		if (*info[i] == ('>' * (-1)))
+			break ;
 		ft_putstr_fd(info[i], fd);
 		i++;
 		if (info[i])

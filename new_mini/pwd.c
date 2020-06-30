@@ -4,7 +4,7 @@ int	ft_pwd(char **info, int fd)
 {
 	char	path[1024];
 
-	if (info[1] != NULL)
+	if (info[1] && *info[1] != ('>' * (-1)))
 	{
 		ft_puts("too many arguments!");
 		ft_puts("\n");

@@ -12,7 +12,7 @@ int		parse_err(char *ptr, int c)
 }
 void	read_env(char **info, int fd)
 {
-	if (!info[1])
+	if (!info[1] || *info[1] == ('>' * (-1)))
 		g_ret = ft_print_env(g_env, fd);
 	if (info[1])
 	{
@@ -27,7 +27,7 @@ void	read_cmd(char **info, int fd)
 	if (ft_strcmp(info[0], "$?") == 0)
 		ft_putnbr_newline(g_ret);
 	else if (ft_strcmp(info[0], "echo") == 0)
-		g_ret = (ft_strchr(info[1], '$')) ? ft_print_env_1(info) :
+		g_ret = (info[1] && ft_strchr(info[1], '$')) ? ft_print_env_1(info) :
 		ft_echo(info, fd);
 	else if (ft_strcmp(info[0], "cd") == 0)
 		g_ret = ft_cd(info);
