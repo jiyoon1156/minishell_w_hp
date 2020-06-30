@@ -14,7 +14,7 @@ int	ft_echo(char **info, int fd)
 	}
 	while (info[i])
 	{
-		if (*info[i] == ('>' * (-1)))
+		if (*info[i] == R_REDIR || *info[i] == L_REDIR)
 			break ;
 		ft_putstr_fd(info[i], fd);
 		i++;
