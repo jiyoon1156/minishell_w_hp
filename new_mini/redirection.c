@@ -4,6 +4,7 @@ int	redirection(char *redir, int r_flag)
 {
 	int	fd;
 
+	ft_putnbr(r_flag);
 	fd = 1;
 	if (redir != 0)
 	{

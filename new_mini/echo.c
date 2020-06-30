@@ -23,5 +23,7 @@ int	ft_echo(char **info, int fd)
 	}
 	if (n_opt == 0)
 		ft_putstr_fd("\n", fd);
+	if (fd != -1 && fd != 1)
+		close(fd);
 	return (0);
 }

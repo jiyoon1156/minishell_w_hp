@@ -21,11 +21,25 @@ void	read_env(char **info, int fd)
 	// }
 }
 
-void	ft_cmd_fork(char *path_cmd, char **info)
+void	ft_cmd_fork(char *path_cmd, char **info, int fd)
 {
 	int pid;
 	int status;
+	char **av;
+	int		i;
 
+	av = malloc(sizeof(char *) * (ft_cnt(info) + 1));
+	i = 0;
+	while (*info)
+	{
+		if (**info != R_REDIR && **info != L_REDIR)
+			av[i++] = *info;
+		else if (**(info) == **(info + 1))
+			info = info + 2;
+		else
+			info++;
+		info++;
+	}
 	pid = fork();
 	if (pid < 0)
 	{
@@ -34,7 +48,8 @@ void	ft_cmd_fork(char *path_cmd, char **info)
 	}
 	else if (pid == 0)
 	{
-		execve(path_cmd, info, g_env);
+		dup2(fd, 1);
+		execve(path_cmd, av, g_env);
 	}
 	else
 	{
@@ -67,7 +82,7 @@ void	read_cmd(char **info, int fd)
 	else if (ft_strcmp(info[0], "exit") == 0)
 		exit(0);
 	else if((path_cmd = ft_pathjoin(ft_find_path(), info)))
-		ft_cmd_fork(path_cmd, info);
+		ft_cmd_fork(path_cmd, info, fd);
 	else
 		g_ret = ft_ret("command not found\n", 127);
 }
@@ -97,7 +112,7 @@ int		ft_cmd(char **info)
 				if (*info[++i] == ('<' * (-1)) && !(parse_err(info[i], '<')))
 					return (0);
 			}
-			fd = redirection(info[i], r_flag);
+			fd = redirection(info[++i], r_flag);
 		}
 		i++;
 	}
