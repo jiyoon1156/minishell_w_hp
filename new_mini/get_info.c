@@ -86,12 +86,12 @@ char	**get_info(char *line)
 	get_info2(line, info, tmp, quote);
 
 ///////info 확인코드///////
-	int i = 0;
-	while (info[i])
-	{
-		ft_puts(info[i++]);
-		ft_puts("!\n");
-	}
+	// int i = 0;
+	// while (info[i])
+	// {
+	// 	ft_puts(info[i++]);
+	// 	ft_puts("!\n");
+	// }
 //////////////////////////
 	
 	return (info);
