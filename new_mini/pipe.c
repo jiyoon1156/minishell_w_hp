@@ -25,4 +25,6 @@ void	ft_pipe(char *cm)
 	cmd = get_cmds(cm, '|');
 	pipe(pipefd);
 	fork_process(pipefd, cmd, path, 0);
+	ft_free(cmd);
+	ft_free(path);
 }

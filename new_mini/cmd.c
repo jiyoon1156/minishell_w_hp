@@ -41,6 +41,7 @@ void	ft_cmd_fork(char *path_cmd, char **info, int fd)
 			info++;
 		info++;
 	}
+	av[i] = 0;
 	pid = fork();
 	if (pid < 0)
 	{
@@ -55,8 +56,9 @@ void	ft_cmd_fork(char *path_cmd, char **info, int fd)
 	else
 	{
 		waitpid(pid, &status, 0);
+		free(path_cmd);
+		free(av);
 	}
-	
 }
 
 void	read_cmd(char **info, int fd)
@@ -86,6 +88,7 @@ void	read_cmd(char **info, int fd)
 		ft_cmd_fork(path_cmd, info, fd);
 	else
 		g_ret = ft_ret("command not found\n", 127);
+	// free(path_cmd);
 }
 
 int		ft_cmd(char **info)

@@ -13,7 +13,8 @@ void	signal_handler(int sig)
 	if (sig == SIGINT)
 	{
 		ft_puts("SIGINT");
-		exit(1);
+		// exit(1);
+		ft_puts("minish% ");
 	}
 	if (sig == SIGQUIT)
 		ft_puts("SIGQUIT");
@@ -114,10 +115,10 @@ int		execute_cmds(char *cmds)
 	else
 	{
 		info = get_info(cmds);
-		//read_cmd(info);	/* redirection, pipe 처리도 같이 */
-		//ft_cmd(&cmds[idx++][j]);
 		ft_cmd(info);
+		ft_free(info);
 	}
+	//ft_free(info);
 	// while (*info)
 	// {
 	// 	free(*info);
@@ -133,6 +134,7 @@ int		main(int ac, char **av, char **envp)
 {
 	char	*line;
 	char	**cmds;
+	int		i;
 
 	(void)ac;
 	(void)av;
@@ -148,13 +150,17 @@ int		main(int ac, char **av, char **envp)
 				line = ft_quote(line);
 			if ((cmds = get_cmds(line, ';')))
 			{
-				while (*cmds)
+				i = 0;
+				while (cmds[i])
 				{
-					execute_cmds(*cmds);
-					free(*cmds);
-					*cmds = 0;
-					cmds++;
+					execute_cmds(cmds[i]);
+					// free(cmds[i]);
+					// cmds[i] = 0;
+					i++;
 				}
+				ft_free(cmds);
+				// free(cmds);
+				// cmds = 0;
 			}
 			free(line);
 			line = 0;

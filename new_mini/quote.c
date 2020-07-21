@@ -1,9 +1,5 @@
 #include "minishell.h"
 
-int		ft_slash_cnt(char *line, int flag)
-{
-
-}
 int		ft_quote_cnt(char *line, int flag)
 {
 	int cnt_dq;
@@ -34,6 +30,7 @@ char	*ft_quote(char *line)
 {
 	int		flag;
 	char	*tmp;
+	char	*temp;
 
 	tmp = line;
 	while (*line != '"' && *line != '\'')
@@ -44,14 +41,20 @@ char	*ft_quote(char *line)
 		flag = ft_ret("quote> ", 0);
 	while (get_next_line(1, &line) > 0)
 	{
-		tmp = ft_strjoin_newline(tmp, line);
+		temp = ft_strjoin_newline(tmp, line);
+		free(tmp);
+		tmp = temp;
 		if (*line != '\0')
 		{
 			if ((flag = (ft_quote_cnt(line, flag))) == 0)
+			{
+				free(line);
 				return (tmp);
+			}
 			flag = flag - 1;
 		}
 		(flag == 1) ? ft_puts("dquote> ") : ft_puts("quote> ");
+		free(line);
 	}
 	return (tmp);
 }
