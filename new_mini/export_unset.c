@@ -25,7 +25,20 @@ int		ft_unset(char **info, char **envp)
 	}
 	env[i] = 0;
 	free(g_env);
+	//ft_env_free(i, g_env);
 	g_env = env;
+		k = 0;
+	// while (av && av[k])
+	// {
+	// 	ft_free(av[k]);
+	// 	k++;
+	// }
+	// k--;
+	// if (av)
+	// {
+	// 	free(av);
+	// 	av = 0;
+	// }
 	return (0);
 }
 

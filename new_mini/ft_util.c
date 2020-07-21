@@ -307,3 +307,15 @@ char		*ft_strtrim(char const *s1, char const *set)
 	ptr[end] = '\0';
 	return (ptr);
 }
+
+void ft_env_free(int i, char **env)
+{
+	while (i < 0 && env[i])
+	{
+		i--;
+	 	free(env[i]);
+	 	env[i] = 0;
+	}
+	free(env);
+	env = 0;
+}
