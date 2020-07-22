@@ -13,8 +13,6 @@ void	signal_handler(int sig)
 	if (sig == SIGINT)
 	{
 		ft_puts("SIGINT");
-		// exit(1);
-		ft_puts("minish% ");
 	}
 	if (sig == SIGQUIT)
 		ft_puts("SIGQUIT");
