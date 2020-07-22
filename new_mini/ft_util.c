@@ -238,7 +238,7 @@ void	ft_putnbr_newline(int n)
 
 int	ft_ret(char *str, int nb)
 {
-	ft_puts(str);
+	ft_putstr_fd(str, 2);
 	return (nb);
 }
 

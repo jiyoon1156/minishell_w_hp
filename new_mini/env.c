@@ -8,7 +8,7 @@ int	ft_env_valid(char **info)
 	while (info && info[i] && (info[i][0] != R_REDIR) && (info[i][0] != L_REDIR))
 	{
 		if (!ft_strchr(info[i], '='))
-			return (1);
+			return (127);
 		i++;
 	}
 	return (0);

@@ -70,7 +70,7 @@ int		ft_export(char **info, char **envp, int fd)
 
 	if (ft_env_valid(info))
 	{
-		ft_puts("bad assignment\n");
+		ft_putstr_fd("bad assignment\n", 2);
 		return (1);
 	}
 	env = malloc(sizeof(char *) * (ft_cnt(envp) + ft_cnt(info) + 1));

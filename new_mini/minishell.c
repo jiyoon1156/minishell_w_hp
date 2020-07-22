@@ -5,14 +5,14 @@ char **g_env = 0;
 
 void	print_prompt(void)
 {
-	ft_puts("minish% ");
+	ft_putstr_fd("minish% ", 2);
 }
 
 void	signal_handler(int sig)
 {
 	if (sig == SIGINT)
 	{
-		ft_puts("\nminish% ");
+		ft_putstr_fd("\nminish% ", 2);
 		g_ret = 1;
 	}
 }
@@ -88,7 +88,7 @@ char	**get_cmds(char *line, char sep)
 			if (*(tmp = line) && *tmp == sep)//; 가 두개일때 파스에러
 			{
 				//에러 처리하기 - free하고
-				ft_puts("parse error\n");
+				ft_putstr_fd("parse error\n", 2);
 				return (0);
 			}
 		}

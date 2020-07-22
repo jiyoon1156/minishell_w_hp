@@ -4,8 +4,8 @@ int		parse_err(char *ptr, int c)
 {
 	if (*ptr == (c * (-1)))
 	{
-		(c == '>') ? ft_puts("parse error near `>'\n") :
-		ft_puts("parse error near `<'\n");
+		(c == '>') ? ft_putstr_fd("parse error near `>'\n", 2) :
+		ft_putstr_fd("parse error near `<'\n", 2);
 		g_ret = 127;
 		return (0);
 	}
@@ -19,6 +19,8 @@ void	read_env(char **info, int fd)
 	// {
 		if ((g_ret = ft_env_valid(info)) == 0)
 			ft_env(info, fd);
+		else
+			ft_putstr_fd("No such file or directory\n", 2);
 	// }
 }
 
@@ -45,7 +47,7 @@ void	ft_cmd_fork(char *path_cmd, char **info, int fd)
 	pid = fork();
 	if (pid < 0)
 	{
-		ft_puts("fork failed");
+		ft_putstr_fd("fork failed", 2);
 		exit(1);
 	}
 	else if (pid == 0)
