@@ -116,7 +116,8 @@ int		execute_cmds(char *cmds)
 	else
 	{
 		info = get_info(cmds);
-		ft_cmd(info);
+		if (*info != 0)
+			ft_cmd(info);
 		ft_free(info);
 		info = 0;
 	}

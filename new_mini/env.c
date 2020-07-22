@@ -8,10 +8,10 @@ int	ft_env_valid(char **info)
 	while (info && info[i] && (info[i][0] != R_REDIR) && (info[i][0] != L_REDIR))
 	{
 		if (!ft_strchr(info[i], '='))
-			return (0);
+			return (1);
 		i++;
 	}
-	return (1);
+	return (0);
 }
 
 int	ft_print_env(char **envp, int fd)

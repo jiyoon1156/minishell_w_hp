@@ -17,7 +17,7 @@ void	read_env(char **info, int fd)
 	// 	g_ret = ft_print_env(g_env, fd);
 	// if (info[1])
 	// {
-		if ((g_ret = ft_env_valid(info)))
+		if ((g_ret = ft_env_valid(info)) == 0)
 			ft_env(info, fd);
 	// }
 }
