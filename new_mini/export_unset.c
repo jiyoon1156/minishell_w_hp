@@ -68,7 +68,7 @@ int		ft_export(char **info, char **envp, int fd)
 	int		i;
 	int		j;
 
-	if (!ft_env_valid(info))
+	if (ft_env_valid(info))
 	{
 		ft_puts("bad assignment\n");
 		return (1);

@@ -11,9 +11,7 @@ void	print_prompt(void)
 void	signal_handler(int sig)
 {
 	if (sig == SIGINT)
-		ft_puts("SIGINT");
-	if (sig == SIGQUIT)
-		ft_puts("SIGQUIT");
+		ft_puts("\nminish%");
 }
 
 char	**ft_cpenv(char **envp)

@@ -13,7 +13,7 @@ int		ft_quote_cnt(char *line, int flag)
 		cnt_q = 1;
 	while (*line)
 	{
-		if (cnt_q % 2 == 0 && *line == '"'&& *(line - 1) != '\\')
+		if (cnt_q % 2 == 0 && *line == '"' && *(line - 1) != '\\')
 			cnt_dq++;
 		if (cnt_dq % 2 == 0 && *line == '\'')
 			cnt_q++;
