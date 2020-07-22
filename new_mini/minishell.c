@@ -35,6 +35,7 @@ char	**ft_cpenv(char **envp)
 		env[i] = ft_strdup(envp[i]);
 		i++;
 	}
+	env[i] = 0;
 	return (env);
 }
 
@@ -117,6 +118,7 @@ int		execute_cmds(char *cmds)
 		info = get_info(cmds);
 		ft_cmd(info);
 		ft_free(info);
+		info = 0;
 	}
 	//ft_free(info);
 	// while (*info)
@@ -151,20 +153,17 @@ int		main(int ac, char **av, char **envp)
 			if ((cmds = get_cmds(line, ';')))
 			{
 				i = 0;
-				while (cmds[i])
+				while (cmds[i] && *cmds[i])
 				{
 					execute_cmds(cmds[i]);
-					// free(cmds[i]);
-					// cmds[i] = 0;
 					i++;
 				}
-				ft_free(cmds);
-				// free(cmds);
-				// cmds = 0;
+				 ft_free(cmds);
+				 cmds = 0;
 			}
-			free(line);
-			line = 0;
 		}
+		free(line);
+		line = 0;
 		print_prompt();
 	}
 	return (0);

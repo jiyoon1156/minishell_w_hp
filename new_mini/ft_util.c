@@ -310,7 +310,7 @@ char		*ft_strtrim(char const *s1, char const *set)
 
 void ft_env_free(int i, char **env)
 {
-	while (i < 0 && env[i])
+	while (i > 0)
 	{
 		i--;
 	 	free(env[i]);

@@ -1,5 +1,16 @@
 #include "minishell.h"
 
+void	ft_free_3(char ***info)
+{
+	int i;
+
+	i = 0;
+	while (info[i])
+		ft_free(info[i++]);
+	free(info);
+	info = 0;
+}
+
 int		ft_unset(char **info, char **envp)
 {
 	char	**env;
@@ -7,13 +18,14 @@ int		ft_unset(char **info, char **envp)
 	char	***av;
 	int		k;
 
-	av = malloc(sizeof(char **) * ft_cnt(envp));
+	av = malloc(sizeof(char **) * (ft_cnt(envp) + 1));
 	i = 0;
 	while (envp[i])
 	{
 		av[i] = ft_split(envp[i], '=');
 		i++;
 	}
+	av[i] = 0;
 	env = malloc(sizeof(char *) * (i + ft_cnt(info)));
 	i = 0;
 	k = 0;
@@ -24,21 +36,9 @@ int		ft_unset(char **info, char **envp)
 		k++;
 	}
 	env[i] = 0;
-	free(g_env);
-	//ft_env_free(i, g_env);
+	ft_free(g_env);
 	g_env = env;
-		k = 0;
-	// while (av && av[k])
-	// {
-	// 	ft_free(av[k]);
-	// 	k++;
-	// }
-	// k--;
-	// if (av)
-	// {
-	// 	free(av);
-	// 	av = 0;
-	// }
+	ft_free_3(av);
 	return (0);
 }
 
@@ -57,6 +57,8 @@ void	env_add(char *info, char **env)
 	}
 	if (env[i])
 		free(env[i]);
+	if (env[i] == 0)
+		env[i + 1] = 0;
 	env[i] = ft_strdup(info);
 }
 
@@ -66,6 +68,11 @@ int		ft_export(char **info, char **envp, int fd)
 	int		i;
 	int		j;
 
+	if (!ft_env_valid(info))
+	{
+		ft_puts("bad assignment\n");
+		return (1);
+	}
 	env = malloc(sizeof(char *) * (ft_cnt(envp) + ft_cnt(info) + 1));
 	i = 0;
 	while (envp[i])
@@ -73,15 +80,15 @@ int		ft_export(char **info, char **envp, int fd)
 		env[i] = ft_strdup(envp[i]);
 		i++;
 	}
+	env[i] = 0;
 	j = 1;
 	while (info[j])
 		env_add(info[j++], env);
 	i = 0;
-	while (env[i])
-		i++;
-	env[i] = 0;
-	//ft_print_env(env, fd);
-	free(g_env);
+	// while (env[i])
+	// 	i++;
+	// env[i] = 0;
+	ft_free(g_env);
 	g_env = env;
 	return (0);
 }

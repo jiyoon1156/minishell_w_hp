@@ -18,7 +18,7 @@ void	read_env(char **info, int fd)
 	// if (info[1])
 	// {
 		if ((g_ret = ft_env_valid(info)))
-			ft_env(info, g_env, fd);
+			ft_env(info, fd);
 	// }
 }
 
@@ -87,8 +87,10 @@ void	read_cmd(char **info, int fd)
 	else if((path_cmd = ft_pathjoin(ft_find_path(), info)))
 		ft_cmd_fork(path_cmd, info, fd);
 	else
-		g_ret = ft_ret("command not found\n", 127);
-	// free(path_cmd);
+		{g_ret = ft_ret("command not found\n", 127);
+	  free(path_cmd);
+	  path_cmd = 0;
+		}
 }
 
 int		ft_cmd(char **info)

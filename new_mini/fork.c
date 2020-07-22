@@ -30,6 +30,7 @@ char	*ft_pathjoin(char **path, char **cmd)
 		i++;
 	}
 	  ft_free(path);
+	  path = 0;
 	return (res);
 }
 

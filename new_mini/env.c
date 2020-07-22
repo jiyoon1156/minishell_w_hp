@@ -2,23 +2,28 @@
 
 int	ft_env_valid(char **info)
 {
-	info++;
-	while (*info && (*info[0] != R_REDIR) && (*info[0] != L_REDIR))
+	int	i;
+	
+	i = 1;
+	while (info && info[i] && (info[i][0] != R_REDIR) && (info[i][0] != L_REDIR))
 	{
-		if (!ft_strchr(*info, '='))
+		if (!ft_strchr(info[i], '='))
 			return (0);
-		info++;
+		i++;
 	}
 	return (1);
 }
 
 int	ft_print_env(char **envp, int fd)
 {
-	while (*envp)
+	int	i;
+
+	i = 0;
+	while (envp[i])
 	{
-		ft_putstr_fd(*envp, fd);
+		ft_putstr_fd(envp[i], fd);
 		ft_putstr_fd("\n", fd);
-		envp++;
+		i++;
 	}
 	if (fd != 1 && fd != -1)
 		close(fd);
@@ -56,27 +61,40 @@ int	ft_print_env_1(char **info)
 	return (0);
 }
 
-int	ft_env(char **info, char **envp, int fd)
+int	ft_env(char **info, int fd)
 {
 	char	**env;
 	int		i;
 	int		j;
 
-	env = malloc(sizeof(char *) * (ft_cnt(envp) + ft_cnt(info) + 1));
+	env = malloc(sizeof(char *) * (ft_cnt(g_env) + ft_cnt(info)));
+	// ft_putnbr(ft_cnt(g_env));
+	// ft_putnbr(ft_cnt(info));
 	i = 0;
-	while (envp[i])
+	while (g_env[i])
 	{
-		env[i] = ft_strdup(envp[i]);
+		env[i] = ft_strdup(g_env[i]);
 		i++;
 	}
 	j = 0;
+	env[i] = 0;
 	while (info[++j] && info[j][0] != R_REDIR && info[j][0] != L_REDIR)
 		env_add(info[j], env);
-	i = 0;
-	while (env[i])
-		i++;
-	env[i] = 0;
+	// i = 0;
+	// while (env[i])
+	// 	i++;
+	// env[i] = 0;
 	ft_print_env(env, fd);
-	ft_env_free(i, env);
+	// while (i > 0)
+	// {
+	// 	i--;
+	//  	free(env[i]);
+	//  	env[i] = 0;
+	// }
+	// free(env);
+	// env = 0;
+	ft_free(env);
+	// ft_env_free(i, env);
+	env = 0;
 	return (0);
 }
