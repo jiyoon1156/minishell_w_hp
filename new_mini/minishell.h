@@ -19,7 +19,7 @@ int		ft_echo(char **info, int fd);
 int		ft_pwd(char **info, int fd);
 int		ft_cd(char **info);
 int		ft_unset(char **info, char **envp);
-int		ft_env(char **info, char **envp, int fd);
+int		ft_env(char **info, int fd);
 int		ft_env_valid(char **info);
 int		ft_print_env(char **envp, int fd);
 int		ft_print_env_1(char **info);
