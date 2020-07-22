@@ -66,9 +66,7 @@ void	read_cmd(char **info, int fd)
 {
 	char *path_cmd;
 
-	if (ft_strcmp(info[0], "$?") == 0)
-		ft_putnbr_newline(g_ret);
-	else if (ft_strcmp(info[0], "echo") == 0)
+	if (ft_strcmp(info[0], "echo") == 0)
 		g_ret = (info[1] && ft_strchr(info[1], '$')) ? ft_print_env_1(info) :
 		ft_echo(info, fd);
 	else if (ft_strcmp(info[0], "cd") == 0)

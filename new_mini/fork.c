@@ -46,7 +46,8 @@ void	child_process(char **info, int *pipefd, char *path_cmd)
 	dup2(pipefd[1], 1);
 	if (pipefd[1] != 1)
 		close(pipefd[1]);
-	execve(path_cmd, info, g_env);
+	//execve(path_cmd, info, g_env);
+	ft_cmd(info);
 	exit(0);
 }
 
