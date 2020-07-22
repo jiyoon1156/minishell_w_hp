@@ -16,9 +16,9 @@ char	*ft_substr_without_quote(char *str, unsigned int start, int len)
 	quote = 0;
 	while (start < len)
 	{
+		changed = quote_check(&quote, str[start]);
 		if (str[start] == '\\' && quote != '\'')
 			start++;
-		changed = quote_check(&quote, str[start]);
 		if (changed == 0)
 			ptr[i++] = str[start];
 		start++;

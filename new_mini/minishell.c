@@ -11,7 +11,10 @@ void	print_prompt(void)
 void	signal_handler(int sig)
 {
 	if (sig == SIGINT)
-		ft_puts("\nminish%");
+	{
+		ft_puts("\nminish% ");
+		g_ret = 1;
+	}
 }
 
 char	**ft_cpenv(char **envp)
