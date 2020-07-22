@@ -32,7 +32,10 @@ char	*ft_pathjoin(char **path, char **cmd)
 	ft_free(path);
 	path = 0;
 	if (res == 0 && lstat(cmd[0], &buf) == 0)
+	{
 		res = ft_strdup(cmd[0]);
+		g_ret = 1;
+	}
 	return (res);
 }
 

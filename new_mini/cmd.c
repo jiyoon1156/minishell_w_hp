@@ -56,6 +56,7 @@ void	ft_cmd_fork(char *path_cmd, char **info, int fd)
 	else
 	{
 		waitpid(pid, &status, 0);
+		g_ret = status / 256;
 		free(path_cmd);
 		free(av);
 	}
