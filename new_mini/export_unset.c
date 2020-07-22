@@ -23,7 +23,7 @@ int		ft_unset(char **info, char **envp)
 			env[i++] = ft_strdup(envp[k]);
 		k++;
 	}
-	env[i] = 0;
+	// env[i] = 0;
 	free(g_env);
 	//ft_env_free(i, g_env);
 	g_env = env;
@@ -55,8 +55,8 @@ void	env_add(char *info, char **env)
 			break ;
 		i++;
 	}
-	if (env[i])
-		free(env[i]);
+	// if (env[i])
+	// 	free(env[i]);
 	env[i] = ft_strdup(info);
 }
 
@@ -76,7 +76,6 @@ int		ft_export(char **info, char **envp, int fd)
 	j = 1;
 	while (info[j])
 		env_add(info[j++], env);
-	i = 0;
 	while (env[i])
 		i++;
 	env[i] = 0;

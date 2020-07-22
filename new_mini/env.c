@@ -62,7 +62,8 @@ int	ft_env(char **info, char **envp, int fd)
 	int		i;
 	int		j;
 
-	env = malloc(sizeof(char *) * (ft_cnt(envp) + ft_cnt(info) + 1));
+	if (!(env = malloc(sizeof(char *) * (ft_cnt(envp) + ft_cnt(info) + 1))))
+		return (0);
 	i = 0;
 	while (envp[i])
 	{
@@ -77,6 +78,7 @@ int	ft_env(char **info, char **envp, int fd)
 		i++;
 	env[i] = 0;
 	ft_print_env(env, fd);
+	// ft_free(env);
 	ft_env_free(i, env);
 	return (0);
 }
