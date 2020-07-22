@@ -29,8 +29,10 @@ char	*ft_pathjoin(char **path, char **cmd)
 		}
 		i++;
 	}
-	  ft_free(path);
-	  path = 0;
+	ft_free(path);
+	path = 0;
+	if (res == 0 && lstat(cmd[0], &buf) == 0)
+		res = ft_strdup(cmd[0]);
 	return (res);
 }
 
