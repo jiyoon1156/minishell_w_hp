@@ -13,6 +13,20 @@ int		ft_cnt(char **envp)
 	return (cnt);
 }
 
+// void	ft_free_3(char ***info)
+// {
+// 	int i;
+
+// 	i = 0;
+// 	while (*info[i])
+// 		free(*info[i++]);
+// 	i = 0;
+// 	while (info[i])
+// 		free(info[i++]);
+// 	free(info);
+// 	info = 0;
+// }
+
 void	ft_free(char **info)
 {
 	int i;

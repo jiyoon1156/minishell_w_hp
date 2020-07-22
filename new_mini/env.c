@@ -67,6 +67,7 @@ int	ft_env(char **info, int fd)
 	int		i;
 	int		j;
 
+
 	env = malloc(sizeof(char *) * (ft_cnt(g_env) + ft_cnt(info)));
 	// ft_putnbr(ft_cnt(g_env));
 	// ft_putnbr(ft_cnt(info));
