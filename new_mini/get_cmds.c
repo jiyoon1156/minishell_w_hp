@@ -27,7 +27,7 @@ int		count_char(char *line, int c)
 	return (cnt);
 }
 
-void	cmds_free(int i, char **cmds)
+char	**cmds_free(int i, char **cmds)
 {
 	while (i > 0)
 	{
@@ -37,6 +37,9 @@ void	cmds_free(int i, char **cmds)
 	}
 	free(cmds);
 	cmds = 0;
+	ft_putstr_fd("parse error\n", 2);
+	g_ret = 258;
+	return (0);
 }
 
 char	**get_cmds(char *line, char sep)
@@ -59,11 +62,7 @@ char	**get_cmds(char *line, char sep)
 			while (*line && *line == ' ')
 				line++;
 			if (*(tmp = line) && *tmp == sep)
-			{
-				cmds_free(i, cmds);
-				ft_putstr_fd("parse error\n", 2);
-				return (0);
-			}
+				return (cmds_free(i, cmds));
 		}
 		line++;
 	}
