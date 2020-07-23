@@ -1,18 +1,18 @@
 #include "minishell.h"
 
-int		parse_err(char *ptr, int c)
+int			parse_err(char *ptr, int c)
 {
 	if (*ptr == (c * (-1)))
 	{
 		(c == '>') ? ft_putstr_fd("parse error near `>'\n", 2) :
 		ft_putstr_fd("parse error near `<'\n", 2);
-		g_ret = 127;
+		g_ret = 258;
 		return (0);
 	}
 	return (0);
 }
 
-void	read_env(char **info, int fd)
+void		read_env(char **info, int fd)
 {
 	if ((g_ret = ft_env_valid(info)) == 0)
 		ft_env(info, fd);
@@ -20,26 +20,11 @@ void	read_env(char **info, int fd)
 		ft_putstr_fd("No such file or directory\n", 2);
 }
 
-void	ft_cmd_fork(char *path_cmd, char **info, int fd)
+static void ft_forking(int fd, char *path_cmd, char **av)
 {
-	int		pid;
-	int		status;
-	char	**av;
-	int		i;
+	int	pid;
+	int status;
 
-	av = malloc(sizeof(char *) * (ft_cnt(info) + 1));
-	i = 0;
-	while (*info)
-	{
-		if (**info != R_REDIR && **info != L_REDIR)
-			av[i++] = *info;
-		else if (**(info) == **(info + 1))
-			info = info + 2;
-		else if (**info == R_REDIR)
-			info++;
-		info++;
-	}
-	av[i] = 0;
 	pid = fork();
 	if (pid < 0)
 	{
@@ -60,10 +45,30 @@ void	ft_cmd_fork(char *path_cmd, char **info, int fd)
 	}
 }
 
-void	read_cmd(char **info, int fd)
+void		ft_cmd_fork(char *path_cmd, char **info, int fd)
 {
-	char *path_cmd;
+	int		status;
+	char	**av;
+	int		i;
 
+	av = malloc(sizeof(char *) * (ft_cnt(info) + 1));
+	i = 0;
+	while (*info)
+	{
+		if (**info != R_REDIR && **info != L_REDIR)
+			av[i++] = *info;
+		else if (**(info) == **(info + 1))
+			info = info + 2;
+		else if (**info == R_REDIR)
+			info++;
+		info++;
+	}
+	av[i] = 0;
+	ft_forking(fd, path_cmd, av);
+}
+
+static int	builtin_cmd(char **info, int fd)
+{
 	if (ft_strcmp(info[0], "echo") == 0)
 		g_ret = (info[1] && ft_strchr(info[1], '$')) ? ft_print_env_1(info) :
 		ft_echo(info, fd);
@@ -81,17 +86,31 @@ void	read_cmd(char **info, int fd)
 		read_env(info, fd);
 	else if (ft_strcmp(info[0], "exit") == 0)
 		exit(0);
-	else if ((path_cmd = ft_pathjoin(ft_find_path(), info)))
-		ft_cmd_fork(path_cmd, info, fd);
 	else
+		return (0);
+	return (1);
+}
+
+void		read_cmd(char **info, int fd)
+{
+	char	*path_cmd;
+	int		ret;
+
+	ret = builtin_cmd(info, fd);
+	if (ret == 0)
 	{
-		g_ret = ft_ret("command not found\n", 127);
-		free(path_cmd);
-		path_cmd = 0;
+		if ((path_cmd = ft_pathjoin(ft_find_path(), info)))
+			ft_cmd_fork(path_cmd, info, fd);
+		else
+		{
+			g_ret = ft_ret("command not found\n", 127);
+			free(path_cmd);
+			path_cmd = 0;
+		}
 	}
 }
 
-int		ft_cmd(char **info)
+int			ft_cmd(char **info)
 {
 	int	i;
 	int r_flag;

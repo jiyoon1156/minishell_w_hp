@@ -49,14 +49,13 @@ int	ft_print_env_1(char **info)
 	{
 		len = ft_strlen(str);
 		while (g_env[++i])
-		{
 			if (!ft_strncmp(g_env[i], str, len) && g_env[i][len] == '=')
 				break ;
-		}
 		tmp = ft_split(g_env[i], '=');
 		ft_puts_newline(tmp[1]);
 		ft_free(tmp);
 	}
+	free(str);
 	return (0);
 }
 
