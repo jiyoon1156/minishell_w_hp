@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-int	ft_env_valid(char **info)
+int			ft_env_valid(char **info)
 {
 	int	i;
 
@@ -27,7 +27,7 @@ int	ft_env_valid(char **info)
 	return (0);
 }
 
-int	ft_print_env(char **envp, int fd)
+int			ft_print_env(char **envp, int fd)
 {
 	int	i;
 
@@ -43,35 +43,41 @@ int	ft_print_env(char **envp, int fd)
 	return (0);
 }
 
-int	ft_print_env_1(char **info)
+static void	ft_print_env2(char *str)
 {
 	int		i;
-	char	*ptr;
-	char	*str;
 	char	**tmp;
 	int		len;
 
+	len = ft_strlen(str);
 	i = -1;
+	while (g_env[++i])
+		if (!ft_strncmp(g_env[i], str, len) && g_env[i][len] == '=')
+			break ;
+	tmp = ft_split(g_env[i], '=');
+	ft_puts_newline(tmp[1]);
+	ft_free(tmp);
+}
+
+int			ft_print_env_1(char **info, int fd)
+{
+	char	*ptr;
+	char	*str;
+
 	ptr = ft_strdup(info[1]);
 	str = ft_strtrim(ptr, "$");
 	free(ptr);
-	if (ft_strcmp(str, "?") == 0)
+	if (ft_strcmp(str, "?") == 0 && g_dq_flag != 2)
 		ft_putnbr_newline(g_ret);
+	else if (g_dq_flag == 2)
+		ft_echo(info, fd);
 	else
-	{
-		len = ft_strlen(str);
-		while (g_env[++i])
-			if (!ft_strncmp(g_env[i], str, len) && g_env[i][len] == '=')
-				break ;
-		tmp = ft_split(g_env[i], '=');
-		ft_puts_newline(tmp[1]);
-		ft_free(tmp);
-	}
+		ft_print_env2(str);
 	free(str);
 	return (0);
 }
 
-int	ft_env(char **info, int fd)
+int			ft_env(char **info, int fd)
 {
 	char	**env;
 	int		i;

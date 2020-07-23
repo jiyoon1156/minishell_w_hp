@@ -72,6 +72,7 @@ void	minishell(void)
 	ft_putstr_fd("minish% ", 2);
 	while (get_next_line(1, &line) > 0)
 	{
+		g_dq_flag = 0;
 		if (*line != '\0')
 		{
 			if ((ft_quote_cnt(line, -1)) != 0)

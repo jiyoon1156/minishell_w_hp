@@ -20,7 +20,10 @@ int		quote_check(int *quote, char c)
 		g_dq_flag = 1;
 	}
 	else if (*quote == 0 && c == '\'')
+	{
 		*quote = c;
+		g_dq_flag = 2;
+	}
 	else if (*quote != 0 && *quote == c)
 		*quote = 0;
 	else

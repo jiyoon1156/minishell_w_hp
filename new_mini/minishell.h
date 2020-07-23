@@ -35,7 +35,7 @@ int		ft_unset(char **info, char **envp);
 int		ft_env(char **info, int fd);
 int		ft_env_valid(char **info);
 int		ft_print_env(char **envp, int fd);
-int		ft_print_env_1(char **info);
+int		ft_print_env_1(char **info, int fd);
 void	env_add(char *info, char **env);
 int		ft_export(char **info, char **envp);
 void	read_cmd(char **info, int fd);
