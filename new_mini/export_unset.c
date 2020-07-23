@@ -84,10 +84,6 @@ int		ft_export(char **info, char **envp, int fd)
 	j = 1;
 	while (info[j])
 		env_add(info[j++], env);
-	i = 0;
-	// while (env[i])
-	// 	i++;
-	// env[i] = 0;
 	ft_free(g_env);
 	g_env = env;
 	return (0);

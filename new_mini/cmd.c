@@ -11,17 +11,13 @@ int		parse_err(char *ptr, int c)
 	}
 	return (0);
 }
+
 void	read_env(char **info, int fd)
 {
-	// if (!info[1] || *info[1] == ('>' * (-1)))
-	// 	g_ret = ft_print_env(g_env, fd);
-	// if (info[1])
-	// {
-		if ((g_ret = ft_env_valid(info)) == 0)
-			ft_env(info, fd);
-		else
-			ft_putstr_fd("No such file or directory\n", 2);
-	// }
+	if ((g_ret = ft_env_valid(info)) == 0)
+		ft_env(info, fd);
+	else
+		ft_putstr_fd("No such file or directory\n", 2);
 }
 
 void	ft_cmd_fork(char *path_cmd, char **info, int fd)
@@ -85,13 +81,14 @@ void	read_cmd(char **info, int fd)
 		read_env(info, fd);
 	else if (ft_strcmp(info[0], "exit") == 0)
 		exit(0);
-	else if((path_cmd = ft_pathjoin(ft_find_path(), info)))
+	else if (path_cmd = ft_pathjoin(ft_find_path(), info))
 		ft_cmd_fork(path_cmd, info, fd);
 	else
-		{g_ret = ft_ret("command not found\n", 127);
-	  free(path_cmd);
-	  path_cmd = 0;
-		}
+	{
+		g_ret = ft_ret("command not found\n", 127);
+		free(path_cmd);
+		path_cmd = 0;
+	}
 }
 
 int		ft_cmd(char **info)
@@ -123,23 +120,5 @@ int		ft_cmd(char **info)
 		i++;
 	}
 	read_cmd(info, fd);
-	///////////////////////////////////////////////////
-	// if ((ptr = ft_strchr(cmd, '>')))
-	// {
-	// 	if (*(ptr + 1) == '>')
-	// 		r_flag = 1;
-	// 	if ((*(ptr + 2) == '>') && !(parse_err(ptr, '>')))
-	// 		return (0);
-	// 	redir = ft_split(cmd, '>');
-	// 	cmd = redir[0];
-	// }
-	// if ((ptr = ft_strchr(cmd, '|')))
-	// {
-	// 	if ((*(ptr + 1) == '|') && !parse_err(ptr, '|'))
-	// 		return (0);
-	// 	ft_pipe(cmd);
-	// }
-	// else
-	// 	normal_cmd(cmd, redir, r_flag);
 	return (0);
 }

@@ -19,7 +19,8 @@ char	*ft_pathjoin(char **path, char **cmd)
 			while ((entry = readdir(dp)) != NULL)
 			{
 				lstat(entry->d_name, &buf);
-				if (S_ISDIR(buf.st_mode) && (ft_strcmp(entry->d_name, cmd[0]) == 0))
+				if (S_ISDIR(buf.st_mode)
+				&& (ft_strcmp(entry->d_name, cmd[0]) == 0))
 				{
 					res = ft_strjoin_sh(path[i], cmd[0]);
 					break ;
@@ -46,7 +47,6 @@ void	child_process(char **info, int *pipefd, char *path_cmd)
 	dup2(pipefd[1], 1);
 	if (pipefd[1] != 1)
 		close(pipefd[1]);
-	//execve(path_cmd, info, g_env);
 	ft_cmd(info);
 	exit(0);
 }
