@@ -1,6 +1,5 @@
 #include "minishell.h"
 
-
 static char	*ft_absolute_path(char **path, char **cmd,
 char *res, struct stat buf)
 {
@@ -19,7 +18,6 @@ char		*ft_pathjoin(char **path, char **cmd)
 	char			*res;
 	int				i;
 	char			*path_cmd;
-
 
 	i = 0;
 	res = 0;
