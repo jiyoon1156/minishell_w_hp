@@ -1,7 +1,7 @@
 #include "minishell.h"
 
-int	g_ret = 0;
-char **g_env = 0;
+int		g_ret = 0;
+char	**g_env = 0;
 
 void	print_prompt(void)
 {
@@ -36,7 +36,7 @@ char	**ft_cpenv(char **envp)
 	return (env);
 }
 
-int	quote_check(int *quote, char c)
+int		quote_check(int *quote, char c)
 {
 	if (*quote == 0 && (c == '\'' || c == '"'))
 		*quote = c;
@@ -63,9 +63,6 @@ int		count_char(char *line, int c)
 	return (cnt);
 }
 
-/* ;를 기준으로 commands 끊기
-		따옴표 고려해서 */
-
 char	**get_cmds(char *line, char sep)
 {
 	char	**cmds;
@@ -85,7 +82,7 @@ char	**get_cmds(char *line, char sep)
 			cmds[i++] = ft_substr(tmp, 0, (line++ - tmp));
 			while (*line && *line == ' ')
 				line++;
-			if (*(tmp = line) && *tmp == sep)//; 가 두개일때 파스에러
+			if (*(tmp = line) && *tmp == sep)
 			{
 				//에러 처리하기 - free하고
 				ft_putstr_fd("parse error\n", 2);
@@ -101,13 +98,11 @@ char	**get_cmds(char *line, char sep)
 
 int		execute_cmds(char *cmds)
 {
-	//char	**cmd;
 	char	**info;
 	int		i;
 	int		j;
 
 	i = 0;
-
 	if (ft_strchr(cmds, '|'))
 		ft_pipe(cmds);
 	else
@@ -118,15 +113,6 @@ int		execute_cmds(char *cmds)
 		ft_free(info);
 		info = 0;
 	}
-	//ft_free(info);
-	// while (*info)
-	// {
-	// 	free(*info);
-	// 	*info = 0;
-	// 	info++;
-	// }
-	// free(info);
-	// info = 0;
 	return (0);
 }
 
@@ -156,8 +142,8 @@ int		main(int ac, char **av, char **envp)
 					execute_cmds(cmds[i]);
 					i++;
 				}
-				 ft_free(cmds);
-				 cmds = 0;
+				ft_free(cmds);
+				cmds = 0;
 			}
 		}
 		free(line);
