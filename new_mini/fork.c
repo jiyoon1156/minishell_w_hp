@@ -40,7 +40,7 @@ char	*ft_pathjoin(char **path, char **cmd)
 	return (res);
 }
 
-void	child_process(char **info, int *pipefd, char *path_cmd)
+void	child_process(char **info, int *pipefd)
 {
 	if (pipefd[0] != 0)
 		close(pipefd[0]);
@@ -80,7 +80,7 @@ void	fork_process(int *pipefd, char **cmd, char **path, int i)
 	else if (pid == 0)
 	{
 		info = get_info(cmd[i]);
-		child_process(info, pipefd, ft_pathjoin(path, info));
+		child_process(info, pipefd);
 	}
 	else
 	{

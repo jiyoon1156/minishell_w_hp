@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-char	*ft_substr_without_quote(char *str, unsigned int start, int len)
+char	*ft_substr_without_quote(char *str, int start, int len)
 {
 	char	*ptr;
 	int		i;

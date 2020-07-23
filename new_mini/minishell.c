@@ -40,7 +40,6 @@ int		execute_cmds(char *cmds)
 {
 	char	**info;
 	int		i;
-	int		j;
 
 	i = 0;
 	if (ft_strchr(cmds, '|'))

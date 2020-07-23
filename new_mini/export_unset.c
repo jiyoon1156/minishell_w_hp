@@ -62,7 +62,7 @@ void	env_add(char *info, char **env)
 	env[i] = ft_strdup(info);
 }
 
-int		ft_export(char **info, char **envp, int fd)
+int		ft_export(char **info, char **envp)
 {
 	char	**env;
 	int		i;

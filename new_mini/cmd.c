@@ -70,13 +70,13 @@ void	read_cmd(char **info, int fd)
 	else if (ft_strcmp(info[0], "cd") == 0)
 		g_ret = ft_cd(info);
 	else if (ft_strcmp(info[0], "pwd") == 0)
-		g_ret = ft_pwd(info, fd);
+		g_ret = ft_pwd(fd);
 	else if (ft_strcmp(info[0], "unset") == 0)
 		g_ret = (info[1]) ? ft_unset(info, g_env)
 		: ft_ret("unset: not enough arguments\n", 1);
 	else if (ft_strcmp(info[0], "export") == 0)
 		g_ret = (!info[1]) ? ft_print_env(g_env, fd)
-		: ft_export(info, g_env, fd);
+		: ft_export(info, g_env);
 	else if (ft_strcmp(info[0], "env") == 0)
 		read_env(info, fd);
 	else if (ft_strcmp(info[0], "exit") == 0)
