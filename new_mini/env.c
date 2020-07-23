@@ -39,7 +39,7 @@ int	ft_print_env_1(char **info)
 	char	**tmp;
 	int		len;
 
-	i = 0;
+	i = -1;
 	ptr = ft_strdup(info[1]);
 	str = ft_strtrim(ptr, "$");
 	free(ptr);
@@ -48,16 +48,14 @@ int	ft_print_env_1(char **info)
 	else
 	{
 		len = ft_strlen(str);
-		while (g_env[i])
+		while (g_env[++i])
 		{
 			if (!ft_strncmp(g_env[i], str, len) && g_env[i][len] == '=')
 				break ;
-			i++;
 		}
 		tmp = ft_split(g_env[i], '=');
-		ft_puts(tmp[1]);
+		ft_puts_newline(tmp[1]);
 		ft_free(tmp);
-		ft_puts("\n");
 	}
 	return (0);
 }

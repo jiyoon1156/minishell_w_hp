@@ -1,5 +1,20 @@
 #include "ft_util.h"
 
+void	ft_putchar(char c)
+{
+	write(1, &c, 1);
+}
+
+void	ft_puts_newline(const char *str)
+{
+	while (*str)
+	{
+		write(1, str, 1);
+		str++;
+	}
+	write(1, "\n", 1);
+}
+
 void	ft_puts(const char *str)
 {
 	while (*str)

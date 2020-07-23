@@ -81,7 +81,7 @@ void	read_cmd(char **info, int fd)
 		read_env(info, fd);
 	else if (ft_strcmp(info[0], "exit") == 0)
 		exit(0);
-	else if (path_cmd = ft_pathjoin(ft_find_path(), info))
+	else if ((path_cmd = ft_pathjoin(ft_find_path(), info)))
 		ft_cmd_fork(path_cmd, info, fd);
 	else
 	{
