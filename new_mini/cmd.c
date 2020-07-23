@@ -20,53 +20,6 @@ void		read_env(char **info, int fd)
 		ft_putstr_fd("No such file or directory\n", 2);
 }
 
-static void ft_forking(int fd, char *path_cmd, char **av)
-{
-	int	pid;
-	int status;
-
-	pid = fork();
-	if (pid < 0)
-	{
-		ft_putstr_fd("fork failed", 2);
-		exit(1);
-	}
-	else if (pid == 0)
-	{
-		dup2(fd, 1);
-		execve(path_cmd, av, g_env);
-	}
-	else
-	{
-		waitpid(pid, &status, 0);
-		g_ret = status / 256;
-		free(path_cmd);
-		free(av);
-	}
-}
-
-void		ft_cmd_fork(char *path_cmd, char **info, int fd)
-{
-	int		status;
-	char	**av;
-	int		i;
-
-	av = malloc(sizeof(char *) * (ft_cnt(info) + 1));
-	i = 0;
-	while (*info)
-	{
-		if (**info != R_REDIR && **info != L_REDIR)
-			av[i++] = *info;
-		else if (**(info) == **(info + 1))
-			info = info + 2;
-		else if (**info == R_REDIR)
-			info++;
-		info++;
-	}
-	av[i] = 0;
-	ft_forking(fd, path_cmd, av);
-}
-
 static int	builtin_cmd(char **info, int fd)
 {
 	if (ft_strcmp(info[0], "echo") == 0)
@@ -116,10 +69,10 @@ int			ft_cmd(char **info)
 	int r_flag;
 	int fd;
 
-	i = 0;
+	i = -1;
 	r_flag = 0;
 	fd = 1;
-	while (info[i])
+	while (info[++i])
 	{
 		if (*info[i] == ('>' * (-1)))
 		{
@@ -132,11 +85,8 @@ int			ft_cmd(char **info)
 			fd = redirection(info[i], r_flag);
 		}
 		else if (*info[i] == L_REDIR)
-		{
 			if (*info[++i] == ('<' * (-1)) && !(parse_err(info[i], '<')))
 				return (0);
-		}
-		i++;
 	}
 	read_cmd(info, fd);
 	return (0);
