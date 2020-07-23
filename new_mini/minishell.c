@@ -3,11 +3,6 @@
 int		g_ret = 0;
 char	**g_env = 0;
 
-void	print_prompt(void)
-{
-	ft_putstr_fd("minish% ", 2);
-}
-
 void	signal_handler(int sig)
 {
 	if (sig == SIGINT)
@@ -55,18 +50,13 @@ int		execute_cmds(char *cmds)
 	return (0);
 }
 
-int		main(int ac, char **av, char **envp)
+void	minishell(void)
 {
 	char	*line;
 	char	**cmds;
 	int		i;
 
-	(void)ac;
-	(void)av;
-	g_env = ft_cpenv(envp);
-	signal(SIGINT, signal_handler);
-	signal(SIGQUIT, signal_handler);
-	print_prompt();
+	ft_putstr_fd("minish% ", 2);
 	while (get_next_line(1, &line) > 0)
 	{
 		if (*line != '\0')
@@ -77,17 +67,22 @@ int		main(int ac, char **av, char **envp)
 			{
 				i = 0;
 				while (cmds[i] && *cmds[i])
-				{
-					execute_cmds(cmds[i]);
-					i++;
-				}
+					execute_cmds(cmds[i++]);
 				ft_free(cmds);
-				cmds = 0;
 			}
 		}
 		free(line);
-		line = 0;
-		print_prompt();
+		ft_putstr_fd("minish% ", 2);
 	}
+}
+
+int		main(int ac, char **av, char **envp)
+{
+	(void)ac;
+	(void)av;
+	g_env = ft_cpenv(envp);
+	signal(SIGINT, signal_handler);
+	signal(SIGQUIT, signal_handler);
+	minishell();
 	return (0);
 }
