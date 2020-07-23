@@ -49,5 +49,6 @@ char	**ft_find_path(void);
 char	*ft_pathjoin(char **path, char **cmd);
 char	**get_cmds(char *line, char sep);
 void	ft_cmd_fork(char *path_cmd, char **info, int fd);
+void    ft_exit(char **info);
 
 #endif

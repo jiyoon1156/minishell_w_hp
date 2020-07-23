@@ -50,7 +50,7 @@ static int	builtin_cmd(char **info, int fd)
 	else if (ft_strcmp(info[0], "env") == 0)
 		read_env(info, fd);
 	else if (ft_strcmp(info[0], "exit") == 0)
-		exit(0);
+		ft_exit(info);
 	else
 		return (0);
 	return (1);
