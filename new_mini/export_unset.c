@@ -19,12 +19,9 @@ int		ft_unset(char **info, char **envp)
 	int		k;
 
 	av = malloc(sizeof(char **) * (ft_cnt(envp) + 1));
-	i = 0;
-	while (envp[i])
-	{
+	i = -1;
+	while (envp[++i])
 		av[i] = ft_split(envp[i], '=');
-		i++;
-	}
 	av[i] = 0;
 	env = malloc(sizeof(char *) * (i + ft_cnt(info)));
 	i = 0;

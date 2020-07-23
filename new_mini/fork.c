@@ -1,6 +1,19 @@
 #include "minishell.h"
 
-char	*ft_pathjoin(char **path, char **cmd)
+
+static char	*ft_absolute_path(char **path, char **cmd,
+char *res, struct stat buf)
+{
+	path = 0;
+	if (res == 0 && lstat(cmd[0], &buf) == 0)
+	{
+		res = ft_strdup(cmd[0]);
+		g_ret = 1;
+	}
+	return (res);
+}
+
+char		*ft_pathjoin(char **path, char **cmd)
 {
 	DIR				*dp;
 	struct dirent	*entry;
@@ -10,9 +23,9 @@ char	*ft_pathjoin(char **path, char **cmd)
 
 	dp = NULL;
 	entry = NULL;
-	i = 0;
+	i = -1;
 	res = 0;
-	while (path[i])
+	while (path[++i])
 	{
 		if ((dp = opendir(path[i])) != NULL)
 		{
@@ -28,19 +41,15 @@ char	*ft_pathjoin(char **path, char **cmd)
 			}
 			closedir(dp);
 		}
-		i++;
 	}
+	res = ft_relative_path(path, cmd, res, buf);
 	ft_free(path);
-	path = 0;
-	if (res == 0 && lstat(cmd[0], &buf) == 0)
-	{
-		res = ft_strdup(cmd[0]);
-		g_ret = 1;
-	}
+	if (res == 0)
+		res = ft_absolute_path(path, cmd, res, buf);
 	return (res);
 }
 
-void	child_process(char **info, int *pipefd)
+void		child_process(char **info, int *pipefd)
 {
 	if (pipefd[0] != 0)
 		close(pipefd[0]);
@@ -51,7 +60,7 @@ void	child_process(char **info, int *pipefd)
 	exit(0);
 }
 
-void	parent_process(int *pipefd, char **path, char **cmd, int i)
+void		parent_process(int *pipefd, char **path, char **cmd, int i)
 {
 	int		pipefd2[2];
 
@@ -65,7 +74,7 @@ void	parent_process(int *pipefd, char **path, char **cmd, int i)
 	fork_process(pipefd2, cmd, path, i);
 }
 
-void	fork_process(int *pipefd, char **cmd, char **path, int i)
+void		fork_process(int *pipefd, char **cmd, char **path, int i)
 {
 	int		pid;
 	int		status;

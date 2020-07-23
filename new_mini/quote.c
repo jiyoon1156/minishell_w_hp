@@ -35,22 +35,17 @@ char	*ft_quote(char *line)
 	tmp = line;
 	while (*line != '"' && *line != '\'')
 		line++;
-	if (ft_quote_cnt(line, 2) == 2)
-		flag = ft_ret("dquote> ", 1);
-	else
-		flag = ft_ret("quote> ", 0);
+	flag = (ft_quote_cnt(line, 2) == 2) ? ft_ret("dquote> ", 1)
+	: ft_ret("quote> ", 0);
 	while (get_next_line(1, &line) > 0)
 	{
 		temp = ft_strjoin_newline(tmp, line);
 		free(tmp);
 		tmp = temp;
-		if (*line != '\0')
+		if (*line != '\0' && (flag = (ft_quote_cnt(line, flag))) == 0)
 		{
-			if ((flag = (ft_quote_cnt(line, flag))) == 0)
-			{
-				free(line);
-				return (tmp);
-			}
+			free(line);
+			return (tmp);
 			flag = flag - 1;
 		}
 		(flag == 1) ? ft_puts("dquote> ") : ft_puts("quote> ");
