@@ -14,6 +14,7 @@
 
 int		g_ret = 0;
 char	**g_env = 0;
+int		g_dq_flag = 0;
 
 void	signal_handler(int sig)
 {

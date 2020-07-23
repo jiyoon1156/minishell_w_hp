@@ -14,7 +14,12 @@
 
 int		quote_check(int *quote, char c)
 {
-	if (*quote == 0 && (c == '\'' || c == '"'))
+	if (*quote == 0 && c == '"')
+	{
+		*quote = c;
+		g_dq_flag = 1;
+	}
+	else if (*quote == 0 && c == '\'')
 		*quote = c;
 	else if (*quote != 0 && *quote == c)
 		*quote = 0;
