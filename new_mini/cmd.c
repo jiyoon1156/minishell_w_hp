@@ -23,8 +23,8 @@ void		read_env(char **info, int fd)
 static int	builtin_cmd(char **info, int fd)
 {
 	if (ft_strcmp(info[0], "echo") == 0)
-		g_ret = (info[1] && ft_strchr(info[1], '$')) ? ft_print_env_1(info) :
-		ft_echo(info, fd);
+		g_ret = (info[1] && ft_strchr(info[1], '$') && g_dq_flag == 1)
+		? ft_print_env_1(info) : ft_echo(info, fd);
 	else if (ft_strcmp(info[0], "cd") == 0)
 		g_ret = ft_cd(info);
 	else if (ft_strcmp(info[0], "pwd") == 0)

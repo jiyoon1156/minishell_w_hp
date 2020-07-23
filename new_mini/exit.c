@@ -12,10 +12,10 @@
 
 #include "minishell.h"
 
-void ft_exit(char **info)
+void	ft_exit(char **info)
 {
-    if (ft_cnt(info) > 2)
-        ft_putstr_fd("too many arguments\n", 2);
-    else
-        exit(0);
+	if (ft_cnt(info) > 2)
+		ft_putstr_fd("too many arguments\n", 2);
+	else
+		exit(0);
 }
