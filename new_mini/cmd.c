@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   cmd.c                                              :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jhur <marvin@42.fr>                        +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/23 13:54:32 by jhur              #+#    #+#             */
-/*   Updated: 2020/07/23 13:54:37 by jhur             ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "minishell.h"
 
 int			parse_err(char *ptr, int c)
@@ -50,7 +38,7 @@ static int	builtin_cmd(char **info, int fd)
 	else if (ft_strcmp(info[0], "env") == 0)
 		read_env(info, fd);
 	else if (ft_strcmp(info[0], "exit") == 0)
-		ft_exit(info);
+		exit(0);
 	else
 		return (0);
 	return (1);

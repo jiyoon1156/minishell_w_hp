@@ -18,6 +18,7 @@ char	**ft_find_path(void)
 	char	**path;
 
 	i = 0;
+	path = 0;
 	while (g_env[i])
 	{
 		if ((ft_strncmp(g_env[i], "PATH=", 5) == 0))

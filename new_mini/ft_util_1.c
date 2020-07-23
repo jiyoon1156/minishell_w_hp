@@ -40,8 +40,14 @@ void	ft_free(char **info)
 	int i;
 
 	i = 0;
-	while (info[i])
-		free(info[i++]);
-	free(info);
-	info = 0;
+	if (info)
+	{
+		while (info[i])
+		{
+			free(info[i]);
+			info[i++] = 0;
+		}
+		free(info);
+		info = 0;
+	}
 }

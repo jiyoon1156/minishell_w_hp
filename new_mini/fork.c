@@ -34,7 +34,7 @@ char		*ft_pathjoin(char **path, char **cmd)
 	i = 0;
 	res = 0;
 	path_cmd = 0;
-	while (path[i])
+	while (path && path[i])
 	{
 		path_cmd = ft_strjoin_sh(path[i], cmd[0]);
 		if (lstat(path_cmd, &buf) == 0)
