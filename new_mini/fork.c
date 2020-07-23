@@ -2,32 +2,24 @@
 
 char	*ft_pathjoin(char **path, char **cmd)
 {
-	DIR				*dp;
-	struct dirent	*entry;
 	struct stat		buf;
 	char			*res;
 	int				i;
+	char			*path_cmd;
 
-	dp = NULL;
-	entry = NULL;
 	i = 0;
 	res = 0;
+	path_cmd = 0;
 	while (path[i])
 	{
-		if ((dp = opendir(path[i])) != NULL)
+		path_cmd = ft_strjoin_sh(path[i], cmd[0]);
+		if (lstat(path_cmd, &buf) == 0)
 		{
-			while ((entry = readdir(dp)) != NULL)
-			{
-				lstat(entry->d_name, &buf);
-				if (S_ISDIR(buf.st_mode)
-				&& (ft_strcmp(entry->d_name, cmd[0]) == 0))
-				{
-					res = ft_strjoin_sh(path[i], cmd[0]);
-					break ;
-				}
-			}
-			closedir(dp);
+			res = path_cmd;
+			break ;
 		}
+		free(path_cmd);
+		path_cmd = 0;
 		i++;
 	}
 	ft_free(path);
